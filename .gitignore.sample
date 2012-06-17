@@ -1,0 +1,5 @@
+./cache
+./log/
+./application/config/database.php
+.DS_Store
+.gitignore

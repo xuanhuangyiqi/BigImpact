@@ -1,0 +1,512 @@
+/* body {
+	font-family: Verdana, Sans Serif, serif, Arial;
+	font-style: normal;
+	font-weight: 400;
+	text-transform: none;
+	letter-spacing: 0;
+	word-spacing: 0;
+	line-height: 1.2;
+	font-size: 12px;
+	color: #DDD;
+}
+ */
+ 
+ /*主体黑色背景和圆弧形边角设定*/
+.cx-dialog {
+    display: none;
+	text-align: center;
+	position: absolute;
+	color: #E6E6E6;
+	z-index: 100;
+	background: #424242;
+	background: url('../img/button/bg.png'), -moz-linear-gradient(top,rgba(60, 66, 66, 1) 17%,rgba(26, 33, 33, 1) 100%);
+	background: url('../img/button/bg.png'), -webkit-gradient(linear,left top,left bottom,color-stop(17%,rgba(60, 66, 66, 1)),color-stop(100%,rgba(26, 33, 33, 1)));
+	border: 1px solid #333;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	/* box-shadow: inset 0 0 1px #888;
+	-webkit-box-shadow: inset 0 0 1px #888;
+	-moz-box-shadow: inset 0 0 1px #888; */
+	
+	box-shadow: inset 0 0 1px #888, 0px 0 5px rgba(0, 0, 0, 0.8);
+	-webkit-box-shadow: inset 0 0 1px #888, 0px 0 5px rgba(0, 0, 0, 0.8);
+	-moz-box-shadow: inset 0 0 1px #888, 0px 0 5px rgba(0,0,0,0.8);
+	border: 1px solidrgba(60, 60, 60, 0.8);
+	
+}
+/*鼠标变换指示*/
+.cx-button{
+	cursor: pointer;
+}
+.cx-camoption{
+	cursor:pointer;
+}
+/*测试选色框*/
+/* table,th,td
+{
+	border:1px solid blue;
+ 	border-collapse:collapse;
+} */
+/*视角工具框样式*/
+.cx-cameraoptions {
+	display: block;
+	width: 105px;
+	height: 105px;
+	position: relative;
+	
+	border-top-left-radius: 60px;
+	border-top-right-radius: 60px;
+	border-bottom-left-radius: 60px;
+	
+	background: url('../img/button/bg.png'), -moz-linear-gradient(top,rgba(60, 66, 66, 0.5) 17%,rgba(26, 33, 33, 0.5) 100%);
+	background: url('../img/button/bg.png'), -webkit-gradient(linear,left top,left bottom,
+	color-stop(17%,rgba(60, 66, 66, 0.5)),
+	color-stop(100%,rgba(26, 33, 33, 0.5)));
+
+	box-shadow: inset 0 0 1px #888, 0px 0 5px rgba(0, 0, 0, 0.8);
+	-webkit-box-shadow: inset 0 0 1px #888, 0px 0 5px rgba(0, 0, 0, 0.8);
+	-moz-box-shadow: inset 0 0 1px #888, 0px 0 5px rgba(0,0,0,0.8);
+	border: 1px solidrgba(60, 60, 60, 0.8);
+}
+.cx-cameraoptions .cx-camoption {
+	position: absolute;
+	display: inline-block;
+	top: 50%;
+	left: 50%;
+}
+/*四个视角图标的位置和背景*/
+.cx-cameraoptions .camleft {
+	margin-top: -15px;
+	margin-left: -48px;
+}
+.cx-icon-camleft {
+	background-position: -204px -30px;
+	width: 30px;
+	height: 30px;
+}
+.cx-cameraoptions .camright {
+	margin-top: -15px;
+	margin-left: 17px;
+}
+.cx-icon-camright {
+	background-position: -204px -90px;
+	width: 30px;
+	height: 30px;
+}
+.cx-cameraoptions .camtop {
+	margin-left: -15px;
+	margin-top: -51px;
+}
+.cx-icon-camtop {
+	background-position: 0 -170px;
+	width: 30px;
+	height: 30px;
+}
+.cx-cameraoptions .cambottom {
+	margin-left: -14px;
+	margin-top: 21px;
+}
+.cx-icon-cambottom {
+	background-position: -90px -200px;
+	width: 30px;
+	height: 30px;
+}
+.cx-cameraoptions .cx-zoombar {
+	position: absolute;
+	background-color: #EEE;
+	right: 45px;
+	top: 36px;
+	border-radius: 5px;
+}
+/*放大缩小图标*/
+.cx-cameraoptions .zoomin {
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+.cx-cameraoptions .cx-zoombar > * {
+	border: 1px solid #DDD;
+	opacity: .8;
+}
+.cx-icon-zoomin{
+	cursor:pointer;
+	background-position: -120px -134px;
+	width: 14px;
+	height: 14px;
+}
+.cx-cameraoptions .zoomout {
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+.cx-cameraoptions .cx-zoombar > * {
+	border: 1px solid #DDD;
+	opacity: .8;
+}
+.cx-icon-zoomout {
+	cursor:pointer;
+	background-position: -234px -149px;
+	width: 14px;
+	height: 14px;
+}
+/*主视角图标*/
+.cx-cameraoptions .camhome {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+.cx-icon-camhome {
+	cursor:pointer;
+	background-position: -208px -200px;
+	width: 26px;
+	height: 26px;
+}
+/*取色框部分*/
+.cx-colorpicker{
+	display: block;
+	width: 420px;
+	height: 40px;
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 1px #888, 0px 0 5px rgba(0, 0, 0, 0.8);
+	-moz-box-shadow: inset 0 0 1px #888, 0px 0 5px rgba(0,0,0,0.8);
+	border: 1px solidrgba(60, 60, 60, 0.8);
+}
+.cx-colorpalette {
+	float: left;
+	padding-left: 3px;
+	padding-top: 3px;
+	padding-right: 3px;
+	padding-bottom: 3px;
+	height: 28px;
+	width: 1024px;
+	margin:auto;
+}
+/*取色图标样式*/
+.cx-colorpalette #colorp {
+	margin-left: 3px;
+	margin-top: 3px;
+	margin-right: 10px;
+	margin-bottom: 3px;
+	border: 1px inset #666;
+	border-radius: 3px;
+	-box-shadow: inset rgba(0,0,0,1) 0 0 3px;
+	-moz-box-shadow: inset rgba(0,0,0,1) 0 0 3px;
+	-webkit-box-shadow: inset rgba(0, 0, 0, 1) 0 0 3px;
+}
+.cx-colorpalette > * {
+	float: left;
+}
+/*取色图标背景*/
+.cx-icon-palette {
+	cursor: pointer;
+	background-position: 0 -149px;
+	width: 22px;
+	height: 22px;
+}
+/*歷史顏色圖標*/
+.cx-colorpalette > .ocolor {
+	border: 1px inset #666;
+	border-radius: 5px;
+	height: 22px;
+	width: 22px;
+	margin: 3px;
+	cursor: pointer;
+	box-shadow: inset 0 0 2px #111;
+	-webkit-box-shadow: inset 0 0 2px #111;
+	-moz-box-shadow: inset 0 0 2px #111;
+}
+/*分隔符样式*/
+.cx-toolbar .hseparator:nth-child(2) {
+	margin-top: 35px;
+}
+.cx-toolbar .hseparator {
+	margin: 35px 0 0 -5px;
+	padding: 0;
+	width: 45px;
+	height: 5px;
+	border-top: 1px solid #222;
+	box-shadow: inset 0 1px 0 #666;
+}
+/* 工具栏形状 */
+.cx-toolbox{
+	display: block;
+	/* width: 40px;
+	height: 150px; */
+	border-radius: 5px;
+	
+	box-shadow: inset 0 0 1px #888, 0px 0 5px rgba(0, 0, 0, 0.8);
+	-webkit-box-shadow: inset 0 0 1px #888, 0px 0 5px rgba(0, 0, 0, 0.8);
+	-moz-box-shadow: inset 0 0 1px #888, 0px 0 5px rgba(0,0,0,0.8);
+	border: 1px solidrgba(60, 60, 60, 0.8);
+}
+.cx-toolbar {
+	position: relative;
+	margin: auto;
+	z-index: 80;
+	float: top;
+	padding-right: 3px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+/*填方格*/
+.cx-icon-addcube{
+	background-position: -170px 0;
+	width: 34px;
+	height: 34px;
+}
+/*橡皮擦按钮*/
+.cx-icon-eraser {
+	background-position: -101px -102px;
+	width: 34px;
+	height: 34px;
+}
+/*保存按钮*/
+.cx-icon-save{
+	background-position: 0 0;
+	width: 34px;
+	height: 34px;
+}
+/*打开按钮*/
+.cx-icon-load{
+	background-position: -34px -136px;
+	width: 34px;
+	height: 34px;
+}
+/*取色管按钮*/
+.cx-icon-colorpicker {
+	background-position: -102px -68px;
+	width: 34px;
+	height: 34px;
+}
+/*重做按钮*/
+.cx-icon-redo {
+	background-position: -33px -102px;
+	width: 34px;
+	height: 34px;
+}
+/*撤销按钮*/
+.cx-icon-undo {
+	background-position: -136px -102px;
+	width: 34px;
+	height: 34px;
+}
+/*取色小工具*/
+table.cx-colorpad {
+	font-size: 12px!important;
+	margin: 0;
+	padding: 5px;
+	text-align: center;
+	margin-bottom: 5px;
+}
+/*标题栏*/
+.cx-dialog  .cx-dialog-title {
+	text-align:center;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 10px;
+	border-bottom: 1px solid #666;
+	
+	box-shadow: inset 0 -1px 0 #222;
+	-webkit-box-shadow: inset 0 -1px 0 #222;
+	-moz-box-shadow: inset 0 -1px 0 #222;
+	
+	color: #FAFAFA;
+	text-shadow: 0 1px 3px #111;
+	
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+
+}
+/*关闭取色板按钮样式*/
+.cx-icon-sketchdel {
+	background-position: -274px -89px;
+	width: 11px;
+	height: 11px;
+}
+.cx-dialog-close {
+	cursor: pointer;
+	top: 14px;
+	right: 5px;
+	position: absolute;
+	opacity: .8;
+}
+.cx-colorpad .Title {
+	font-size: 12px!important;
+	font-weight: bold;
+	margin: 0 0 10px 0;
+	padding: 0;
+	text-align: center;
+	width: 100%;
+}
+.cx-colorpad .cx-colorad-preview {
+	font-size: 9px;
+	text-align: center;
+	padding: 4px 4px 4px 15px;
+}
+.cx-colorpad .cx-colorad-preview div {
+	height: 62px;
+	margin: 0 auto;
+	padding: 0;
+	width: 62px;
+	box-shadow: inset 0 0 5px #111;
+	-moz-box-shadow: inset 0 0 5px #111;
+	-webkit-box-shadow: inset 0 0 5px #111;
+}
+.cx-colorpad .cx-colorad-preview div span {
+	border: 1px solid #666;
+	display: block;
+	height: 30px;
+	margin: 0 auto;
+	padding: 0;
+	width: 60px;
+	box-shadow: inset 0 1px 5px black;
+	-moz-box-shadow: inset 0 1px 5px #000;
+	-webkit-box-shadow: inset 0 1px 5px black;
+}
+.cx-colorpad .cx-colorad-preview .Current {
+	border-top-width: 0;
+	cursor: pointer;
+}
+.cx-colorpad .cx-colorpad-colorclum {
+	text-align: center;
+	width: 125px;
+}
+.cx-button-colorpad{
+	margin-top: 35px;
+	margin-bottom: 15px;
+	margin-left: 25px;
+	
+	-moz-box-shadow: inset 0 1px 0 0 #caefab;
+	-webkit-box-shadow: inset 0 1px 0 0 #CAEFAB;
+	box-shadow: inset 0 1px 0 0 #CAEFAB;
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0.05,#77D42A),color-stop(1,#5CB811));
+	background: -moz-linear-gradient(center top,#77D42A 5%,#5CB811 100%);
+	background-color: #77D42A;
+	border: 1px solid #268A16;
+	color: white;
+	text-shadow: 1px 1px 0 #268A16;
+	cursor: pointer;
+	display: inline-block;
+	padding: 4px 10px;
+	border-radius: 4px;
+	width: 56px;
+	margin-top: 10px;
+	margin-left: 9px;
+	margin-bottom:10px;
+}
+/* .cx-colorpad .Button input {
+	width: 70px;
+	margin-left: 10px;
+	cursor: pointer;
+	border-radius: 4px;
+} */
+.cx-colorpad .cx-colorpad-grid {
+	margin-top: 17px;
+	margin-left: 10px;
+	text-align: center;
+	width: 115;
+}
+.cx-colorpad .cx-colorpad-grid span.QuickColor {
+	border: 1px solid #666;
+	box-shadow: inset 0 1px 1px #111;
+	-webkit-box-shadow: inset 0 1px 1px #111;
+	-moz-box-shadow: inset 0 1px 1px #111;
+	
+	cursor: pointer;
+	
+	display: block;
+	float: left;
+	height: 16px;
+	line-height: 16px;
+	margin: 0;
+	padding: 0;
+	width: 17px;
+}
+
+input[type="text"], textarea {
+	background-color: #EEE;
+	box-shadow: inset 0 0 5px #222;
+	-webkit-box-shadow: inset 0 0 5px #222;
+	-moz-box-shadow: inset 0 0 5px #222;
+	color: #333;
+	padding: 5px 8px;
+	border: none;
+	border-bottom: 1px solid #3A3A3A;
+}
+
+.cx-colorpad td.cx-text-colorpad {
+	font-size: 12px!important;
+	height: 22px;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	width: 70px;
+}
+.cx-dialog-label{
+    color: #E6E6E6;
+}
+.cx-colorpad td.cx-text-colorpad input {
+	background-color: white;
+	border: 1px inset #AAA;
+	height: 15px;
+	margin: 0 0 3px 5px;
+	text-align: left;
+	width: 39px;
+}
+
+/*图标文件路径*/
+.cx-icon-camleft, .cx-icon-camright, .cx-icon-camtop, .cx-icon-cambottom, 
+.cx-icon-camhome, .cx-icon-eraser, .cx-icon-colorpicker, .cx-icon-addcube, 
+.cx-icon-redo, .cx-icon-undo, .cx-icon-save, .cx-icon-load {
+	background-image: url('../img/button/iconset1_v4.png');
+	background-repeat: no-repeat;
+}
+.cx-icon-zoomin, .cx-icon-zoomout, .cx-icon-palette, .cx-icon-sketchdel{
+	background-image: url('../img/button/iconset2_v4.png');
+	background-repeat: no-repeat;
+}
+
+/*.dialog .dialog-content {
+ padding: 5px;
+ }
+ .cx-dialog {
+ text-align: center;
+ color: #E6E6E6;
+ }
+ .dialog .dialog-content ::-webkit-scrollbar-thumb {
+ border-radius: 10px;
+ background-color: #777;
+ }
+ .dialog {
+ text-align: center;
+ color: #E6E6E6;
+ }
+ .dialog .dialog-content ::-webkit-scrollbar {
+ width: 9px;
+ }*/
+ 
+  /*王越按钮样式*/
+/* body{ font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
+
+.demoHeaders { margin-top: 2em; }
+
+#dialog_link {padding: .4em 1em .4em 20px;text-decoration: none;position: relative;}
+
+#dialog_link span.ui-icon {margin: 0 5px 0 0;position: absolute;left: .2em;top: 50%;margin-top: -8px;}
+
+ul.icons {margin: 0; padding: 0;}
+
+#editBar li {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;}
+
+#toolBar li {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; list-style: none; display:block;border: solid 1px;}
+
+ul.icons span.ui-icon {float: left; margin: 0 4px;} */
+
+/*
+ * colorPicker
+ */
+/* #colorPicker {width: 100px;height: 20px;}
+
+#controlBar{width:200px;height:200px;border: 1px solid;z-index: 50;position: 0px 0px; float: left;} */
+
+ 
