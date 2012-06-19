@@ -1,0 +1,149 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+/**
+ * Example
+ *
+ * This is an example of a few basic user interaction methods you could use
+ * all done with a hardcoded array.
+ *
+ * @package		CodeIgniter
+ * @subpackage	Rest Server
+ * @category	Controller
+ * @author		Phil Sturgeon
+ * @link		http://philsturgeon.co.uk/code/
+*/
+
+// This can be removed if you use __autoload() in config.php OR use Modular Extensions
+require APPPATH.'/libraries/REST_Controller.php';
+
+class Tag extends REST_Controller
+{
+    function taginfo_get()
+    {
+        if(!$this->get('tagname'))
+        {
+                $this->response(NULL, 400);
+        }
+
+        $tagname = $this->get('tagname');
+
+        $this->load->model('tag_model', '', TRUE);
+        $this->load->model('user_model','',TRUE);
+
+        $tag = $this->tag_model->get_entry_bytagname($tagname);   
+
+        $user = $this->user_model->get_entry_byuid($tag['bestauthor']);
+        $taginfo['tagname'] = $tag['tagname'];
+        $taginfo['createdate'] = $tag['createdate'];
+        $taginfo['likesnum'] = $tag['likesnum'];
+        $taginfo['bestauthorid'] = $tag['bestauthor'];
+        $taginfo['bestauthorname'] = $user['name'];
+        $taginfo['worksnum'] = $tag['worksnum'];
+        
+        if($taginfo)
+        {
+            $this->response($taginfo, 200); // 200 being the HTTP response code
+        }
+
+        else
+        {
+            $this->response(array('error' => 'User could not be found'), 404);
+        }
+    }
+
+    function workinfo_get()
+    {
+        if(!$this->get('tagname'))
+        {
+                $this->response(NULL, 400);
+        }
+
+        $tagname = $this->get('tagname');
+
+        if(!$this->get('page'))
+        {
+                $page = 1;
+        }
+        else
+        {
+                $page = $this->get('page');
+        }
+
+
+        $this->load->model('tag_model', '', TRUE);
+        $this->load->model('tag_work_model', '', TRUE);
+        $this->load->model('work_model', '', TRUE);
+        $this->load->model('user_model', '', TRUE);
+
+        $tag = $this->tag_model->get_entry_bytagname($tagname);
+
+        $tagid = $tag['tagid'];
+        $workids = $this->tag_work_model->get_workids_bytagidandpage($tagid,$page);
+        $works = $this->work_model->get_entrys_byworkids($workids);
+
+        foreach ($works as $key => $value)
+        {
+            $user = $this->user_model->get_entry_byuid($value['author']);
+            $workinfo[$key]['workid'] = $value['workid'];
+            $workinfo[$key]['authorname'] = $user['name'];
+            $workinfo[$key]['authorid'] = $value['author'];
+            $workinfo[$key]['likesnum'] = $value['likesnum'];
+            $workinfo[$key]['img'] = $value['img'];
+            $workinfo[$key]['tags'] = $value['tags'];
+            $workinfo[$key]['kind'] = $value['kind'];
+            $workinfo[$key]['cubejson'] = $value['cubejson'];
+            $workinfo[$key]['createdate'] = $value['createdate'];
+            $workinfo[$key]['father'] = $value['father'];
+            $workinfo[$key]['ancestor'] = $value['ancestor'];
+
+        }
+        
+        if($workinfo)
+        {
+            $this->response($workinfo, 200); // 200 being the HTTP response code
+        }
+
+        else
+        {
+            $this->response(array('error' => 'bestworkinfo could not be found'), 404);
+        }
+    }
+
+    function bestworkinfo_get()
+    {
+        $this->load->model('bestwork_model', '', TRUE);
+        $this->load->model('work_model', '', TRUE);
+        $this->load->model('user_model', '', TRUE);
+
+        $workids = $this->bestwork_model->get_workids_bynothing();
+        $works = $this->work_model->get_entrys_byworkids($workids);
+
+        foreach ($works as $key => $value)
+        {
+            $user = $this->user_model->get_entry_byuid($value['author']);
+            $bestworkinfo[$key]['workid'] = $value['workid'];
+            $bestworkinfo[$key]['authorname'] = $user['name'];
+            $bestworkinfo[$key]['authorid'] = $value['author'];
+            $bestworkinfo[$key]['likesnum'] = $value['likesnum'];
+            $bestworkinfo[$key]['img'] = $value['img'];
+            $bestworkinfo[$key]['tags'] = $value['tags'];
+            $bestworkinfo[$key]['kind'] = $value['kind'];
+            $bestworkinfo[$key]['cubejson'] = $value['cubejson'];
+            $bestworkinfo[$key]['createdate'] = $value['createdate'];
+            $bestworkinfo[$key]['father'] = $value['father'];
+            $bestworkinfo[$key]['ancestor'] = $value['ancestor'];
+
+        }
+        
+        if($bestworkinfo)
+        {
+            $this->response($bestworkinfo, 200); // 200 being the HTTP response code
+        }
+
+        else
+        {
+            $this->response(array('error' => 'bestworkinfo could not be found'), 404);
+        }
+    }
+	
+}

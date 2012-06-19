@@ -1,0 +1,21 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Search extends Pixel_Controller {
+
+
+	function __construct()
+	{
+		parent::__construct();
+	}
+
+	function index()
+	{
+		$this->load->helper('url');
+		$context='/tag/'.$this->input->get_post('context');
+		redirect(base_url("$context"));
+	}
+}
+
+
+/* End of search.php */
+/* Location: ./application/controllers/search.php */

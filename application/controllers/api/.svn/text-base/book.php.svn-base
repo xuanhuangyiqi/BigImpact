@@ -1,0 +1,89 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+/**
+ * Example
+ *
+ * This is an example of a few basic user interaction methods you could use
+ * all done with a hardcoded array.
+ *
+ * @package		CodeIgniter
+ * @subpackage	Rest Server
+ * @category	Controller
+ * @author		Phil Sturgeon
+ * @link		http://philsturgeon.co.uk/code/
+*/
+
+// This can be removed if you use __autoload() in config.php OR use Modular Extensions
+require APPPATH.'/libraries/REST_Controller.php';
+
+class Book extends REST_Controller
+{
+	
+    
+    function workinfo_get()
+    {
+    	if(!$this->get('uid'))
+        {
+        	$this->response(NULL, 400);
+        }
+
+        $uid = $this->get('uid');
+
+        $this->load->model('work_model', '', TRUE);
+        $this->load->model('user_model','',TRUE);
+
+
+        $user_result=$this->user_model->get_entry_byuid($uid);
+		if (empty($user_result)) 
+		{
+			show_404();
+		}
+
+		$uid = $user_result['uid'];
+        
+		$work_info = $this->work_model->get_myworklist($uid);
+
+
+		if($work_info)
+        {
+            $this->response($work_info, 200); // 200 being the HTTP response code
+        }
+
+        else
+        {
+            $this->response(array('error' => 'could not be found'), 404);
+        }
+		
+    }
+
+    function userinfo_get()
+    {
+    	if(!$this->get('uid'))
+        {
+        	$this->response(NULL, 400);
+        }
+
+        $uid = $this->get('uid');
+        $this->load->model('work_model', '', TRUE);
+        $this->load->model('user_model','',TRUE);
+
+
+        $user_info=$this->user_model->get_entry_byuid($uid);
+
+		if (empty($user_info)) 
+		{
+			show_404();
+		}
+		
+		if($user_info)
+        {
+            $this->response($user_info, 200); // 200 being the HTTP response code
+        }
+
+        else
+        {
+            $this->response(array('error' => 'could not be found'), 404);
+        }
+		
+    }     
+}
