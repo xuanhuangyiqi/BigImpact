@@ -16,8 +16,8 @@ class Auth_test extends CI_Controller
 	public function index()
 	{
 		$id = 3;
-		$responce = $this->rest->get('api/example/auth/format/json',  array('id' => $id), 'json');
-		//print_r($responce);
+		$responce = $this->rest->get('api/user/auth/format/json',  array('id' => $id), 'json');
+		print_r($responce);
 		echo "hello";
 	    //echo $this->rest->debug();
                  # echo "HELLO INDEX";
@@ -25,7 +25,7 @@ class Auth_test extends CI_Controller
 
 	public function get($id)
 	{
-		$responce = $this->rest->get('api/example/auth/format/json',  array('id' => $id), 'json');
+		$responce = $this->rest->get('api/user/auth/format/json',  array('id' => $id), 'json');
 		//print_r($responce);
 		echo $this->rest->debug();
 	}
@@ -36,14 +36,14 @@ class Auth_test extends CI_Controller
         $firstname = "Bill";
         $lastname = "William";
 
-		$responce = $this->rest->put('api/example/auth/',  array('email' => $email ,'firstname' => $firstname,'lastname'=>$lastname), 'json');
+		$responce = $this->rest->put('api/user/auth/',  array('email' => $email ,'firstname' => $firstname,'lastname'=>$lastname), 'json');
 		print_r($responce);
 		echo $this->rest->debug();
 	}
 	
 	public function delete($id)
 	{
-		$responce = $this->rest->delete("api/example/auth/id/$id",'json');
+		$responce = $this->rest->delete("api/user/auth/id/$id",'json');
 		//print_r($responce);
 		echo $this->rest->debug();
 	}

@@ -16,8 +16,37 @@
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
 require APPPATH.'/libraries/REST_Controller.php';
 
-class example extends REST_Controller
+class User extends REST_Controller
 {
+    function profileexist_get()
+    {
+        $id = $this->get('id');
+        if (!empty($id))
+        {
+            $this->load->model('auth_model', '', TRUE);  //加载USER模型
+            $auth = $this->auth_model->get_entry_byid($id);//调用USER模型中的方法
+            if (!empty($auth))
+            {
+                if (empty($auth['object_id']))
+                {
+                    $member_data['url_token'] = 1000;
+                    $member_data['auth_id'] = $id;
+                    $member_data['created'] = time();
+                    $res = $this->member_model->insert_entry($member_data);
+                    $this->response(array('res' => $res), 200);
+                }
+                else
+                    $this->response(array('res' => 0), 200);
+            }
+            else
+                $this->response(array('error' => 'no such id in auth'), 404);
+        }
+        else
+            $this->response(array('error' => 'no id'), 404);
+            
+    }
+
+
     function auth_get()
     {
         
