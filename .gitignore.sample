@@ -1,5 +1,7 @@
-./cache
-./log/
-./application/config/database.php
+application/config/database.php
+application/cache
+application/logs
 .DS_Store
 .gitignore
+application/controllers/api
+application/controllers/user_test.php
