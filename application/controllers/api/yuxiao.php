@@ -20,39 +20,48 @@ class Yuxiao extends REST_Controller
 {
     function member_put()
     {
-        $stringJson = $this->put('stringJson');
-        $in=json_decode($stringJson, true);
-        
+        $userdata=$this->session->userdata('userdata');
 
-        //$this->response($in['url_token'], 200);
-
-        $this->load->model('member_model', '', TRUE);
-
-        $token  =  $in['url_token'];      
-        $profile = $this->member_model->get_entry_bytoken($token);
-
-        if(!empty($profile))
+        if(empty($userdata))
         {
-        	$id = $profile['id'];
-        	$updatestatus = $this->member_model->update_entry($id, $in);
-        	if ($updatestatus == 1)
-        	{
-        	 	$this->response(array('error' =>''), 200);
-        	}
-        	else
-        	{
-        		$this->response(array('error' => 'update error'), 400);
-        	}
+            $this->response(array('error' => 'not login'), 403);
         }
         else
         {
-        	$this->response(array('error' => 'no such member'), 400);
+            if($userdata['auth']==1)
+            {
+                $stringJson = $this->put('stringJson');
+                $in=json_decode($stringJson, true);
+       
+                $this->load->model('member_model', '', TRUE);
+
+                $token  =  $in['url_token'];     
+                $member = $this->member_model->get_entry_bytoken($token);
+
+                if(!empty($member))
+                {
+                     $id = $member['id'];
+                     $updatestatus = $this->member_model->update_entry($id, $in);
+                     if ($updatestatus == 1)
+                     {
+                           $this->response(array('error' =>''), 200);
+                     }
+                     else
+                     {
+                          $this->response(array('error' => 'update error'), 400);
+                     }
+                }
+                else
+                {
+                     $this->response(array('error' => 'no such member'), 400);
+                }
+            }
+       
+            else
+            {
+                $this->response(array('error' => 'you are not a member'), 403);
+            }
+
         }
-
-        
-        
     }
-
-    
-
 }
