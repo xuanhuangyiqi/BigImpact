@@ -18,6 +18,34 @@ require APPPATH.'/libraries/REST_Controller.php';
 
 class User extends REST_Controller
 {
+    function profile_get()
+    {
+        $token = $this->get('token');
+        if (!empty($token))
+        {
+            $this->load->model('member_model', '', TRUE);  //加载USER模型
+            $member = $this->member_model->get_entry_bytoken($token);
+            if (!empty($member))
+            {
+                $this->load->model('auth_model', '', TRUE);  //加载USER模型
+                $auth = $this->auth_model->get_entry_byid($member['auth_id']);
+                $this->response(array(
+                        'first_name' =>     $auth['first_name'],
+                        'last_name' =>      $auth['last_name'],
+                        'avatar_path' =>    $member['avatar_path'],
+                        'gender' =>         $member['gender'],
+                        'language' =>       $member['language'],
+                        'job' =>            $member['job'],
+                        'location' =>       $member['location']), 200);
+            }
+            else
+                $this->response('token error', 200);
+        }
+        else
+            $this->response('no token', 200);
+    }
+
+
     function profileexist_get()
     {
         $id = $this->get('id');
@@ -29,17 +57,44 @@ class User extends REST_Controller
             {
                 if (empty($auth['object_id']))
                 {
-                    $member_data['url_token'] = 1000;
-                    $member_data['auth_id'] = $id;
-                    $member_data['created'] = time();
-                    $res = $this->member_model->insert_entry($member_data);
-                    $this->response(array('res' => $res), 200);
+                    if ($auth['utype'] == 1) //is_member
+                    {
+                        $member_data['url_token'] = rand()%1000000000;
+                        $member_data['auth_id'] = $id+0;
+                        $member_data['created'] = time();
+                        $this->load->model('member_model', '', TRUE);  //加载USER模型
+                        $res = $this->member_model->insert_entry($member_data);
+                        if (!empty($res))
+                        {
+                            $this->auth_model->update_entry($id, array('object_id'=>$res));
+                            $this->response(array('res' => $res), 200);
+                        }
+                        else
+                            $this->response(array('res' => $res, 'error'=>'update_error'), 200);
+                    }
+                    else if ($auth['utype'] == 0)//is_admin
+                    {
+                        $admin_data['auth_id'] = $id+0;
+                        $admin_data['created'] = time();
+                        $this->load->model('admin_model', '', TRUE);  //加载USER模型
+                        $res = $this->admin_model->insert_entry($admin_data);
+                        if (!empty($res))
+                        {
+                            $this->auth_model->update_entry($id, array('object_id'=>$res));
+                            $this->response(array('res' => $res), 200);
+                        }
+                        else
+                            $this->response(array('res' => $res, 'error'=>'update_error'), 200);
+                    }
+                    else
+                        $this->response(array('res' => 0), 200);
+                    
                 }
                 else
                     $this->response(array('res' => 0), 200);
             }
             else
-                $this->response(array('error' => 'no such id in auth'), 404);
+                $this->response(array('error' => 'no such id in auth'), 200);
         }
         else
             $this->response(array('error' => 'no id'), 404);
