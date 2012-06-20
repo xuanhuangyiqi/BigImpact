@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Viewothers_test extends CI_Controller
+class Member_post_test extends CI_Controller
 {
 	public function __construct()
 	{
@@ -14,5 +14,11 @@ class Viewothers_test extends CI_Controller
         print_r($res);
         echo $this->rest->debug();
     }
+
+    public function post()
+    {
+        $res = $this->rest->post('api/wxy/member/', array('email'=>'wxy@124.com'), 'json');
+        print_r($res);
+        echo $this->rest->debug();
+    }
 }
-         
