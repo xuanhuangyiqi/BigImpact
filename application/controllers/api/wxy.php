@@ -6,7 +6,10 @@ class Wxy extends REST_Controller
 {
     function member_get()
     {
-        $token = $this->get('token');
+        $json = $this->get('json');
+        $arr = json_decode($json, TRUE);
+        $token = $arr['token'];
+
         if (!empty($token))
         {
             $this->load->model('member_model', '', TRUE);  //加载USER模型
@@ -27,14 +30,14 @@ class Wxy extends REST_Controller
 
     function member_post()
     {
-        $email = $this->post('email');
+        $json = $this->post('json');
+        $arr = json_decode($json, TRUE);
+        $email = $arr['email'];
         if (!empty($email))
         {
-            $member['email'] = $this->post('email');
-            $member['first_name'] = $this->post('first_name');
-            $member['last_name'] = $this->post('last_name');
+            $member = $arr;
             $member['passwd'] = '000000';
-            $member['url_token'] = rand()%1000000;
+            $member['url_token'] = rand() % 1000000;
             $member['created'] = time();
             $this->load->model('member_model', '',TRUE);
             $m = $this->member_model->get_entry_bymail($member['email']);
@@ -45,6 +48,25 @@ class Wxy extends REST_Controller
         }
         else
             $this->response(array('error' => 'no email'), 400);
+    }
+    function admin_post()
+    {
+        $json = $this->post('json');
+        $arr = json_decode($json, TRUE);
+        $email = $arr['email'];
+        if (!empty($email))
+        {
+            $admin = $arr;
+            $admin['passwd'] = '000000';
+            $admin['created'] = time();
+            $this->load->model('admin_model', '', TRUE);
+            $a = $this->admin_model->get_entry_bymail($admin['email']); 
+            if (!empty($a))
+                $this->response(array('error'=>'dup email'), 400);
+            $res = $this->admin_model->insert_entry($admin);
+            $this->response($admin, 200);
+        }
+        else $this->reponse(array('error'=>'no mail', 400));
     }
 }
 

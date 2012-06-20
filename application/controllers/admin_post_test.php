@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Viewothers_test extends CI_Controller
+class Admin_post_test extends CI_Controller
 {
 	public function __construct()
 	{
@@ -8,12 +8,10 @@ class Viewothers_test extends CI_Controller
 		$this->load->library('rest', array('server' => 'http://localhost/'));	
 	}
 
-    public function get($url_token)
+    public function post()
     {
-        $json = json_encode(array('token'=>$url_token));
-        $res = $this->rest->get('api/wxy/member/format/json/', array('json'=>$json), '');
-        print_r($res);
+        $str = '{"email":"htedsv@gmai.com"}';
+        $res = $this->rest->post('api/wxy/admin/', array('json' => $str), 'json');
         echo $this->rest->debug();
     }
 }
-         

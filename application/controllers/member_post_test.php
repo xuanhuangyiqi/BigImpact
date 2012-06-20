@@ -17,8 +17,8 @@ class Member_post_test extends CI_Controller
 
     public function post()
     {
-        $res = $this->rest->post('api/wxy/member/', array('email'=>'wxy@124.com'), 'json');
-        print_r($res);
+        $str = '{"email":"htedsv@gmai.com", "first_name":"wxy"}';
+        $res = $this->rest->post('api/wxy/member/', array('json' => $str), 'json');
         echo $this->rest->debug();
     }
 }

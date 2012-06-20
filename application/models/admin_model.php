@@ -25,6 +25,20 @@ class Admin_model extends CI_Model {
         //return $query->row_array();
     }
 
+    function get_entry_bymail($mail)
+    {
+        $this->db->select('*');
+        $this->db->from('admin');
+        $this->db->where('email',$mail);
+
+        $query = $this->db->get();
+        return $query->row_array();
+
+        //$sql = "SELECT * FROM user WHERE uid = ?";
+        //$query = $this->db->query($sql, array($uid));
+        //return $query->row_array();
+    }
+
 
     function insert_entry($member_data)
     { 
