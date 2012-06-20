@@ -35,6 +35,20 @@ class Member_model extends CI_Model {
         return $query->row_array();
     }
 
+    function get_entry_bymail($mail)
+    {
+        $this->db->select('*');
+        $this->db->from('member');
+        $this->db->where('email',$mail);
+
+        $query = $this->db->get();
+
+        return $query->row_array();
+
+        //$sql = "SELECT * FROM user WHERE uid = ?";
+        //$query = $this->db->query($sql, array($uid));
+        //return $query->row_array();
+    }
 
     function insert_entry($member_data)
     { 
@@ -42,9 +56,16 @@ class Member_model extends CI_Model {
         return mysql_insert_id();
     }
 
+    function update_entry($id, $data)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('member', $data);
+        return 1;
+    }
+
     function delete_entry_byuid($id)
     {
-        $this->db->delete('auth', array('id' => $id)); 
+        $this->db->delete('member', array('id' => $id)); 
         return 1;
     }
     
