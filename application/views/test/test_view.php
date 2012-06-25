@@ -27,8 +27,12 @@
         </div> 
         <div class="span3">
           <a class="btn" id="7">获取制定fellow</a>
-        </div>        
+        </div> 
+        <div class="span3">
+          <a class="btn" id="8">重置数据库</a>
+        </div>      
       </div>
+
       
       <div id="message">
         

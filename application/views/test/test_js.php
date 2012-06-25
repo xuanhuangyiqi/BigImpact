@@ -71,5 +71,15 @@
                 }
             });
           });
+        $("#8").click(function(e) {
+          e.preventDefault();
+                $.ajax({
+                url : 'api/v1/reset',
+                type : 'POST',
+                data　: {},
+                complete:function(x,t){   
+                }
+            });
+          });
       });
 </script>
