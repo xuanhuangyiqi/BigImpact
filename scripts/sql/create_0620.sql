@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `event`(
-    `id` int(11) unsigined NOT NULL AUTO_INCREMENT,
+    `id` int(11) NOT NULL AUTO_INCREMENT,
     `url_token` int(11) NOT NULL,
     `created` int(11) NOT NULL,
     `member_id` int(11) NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `event`(
 
 
 CREATE TABLE IF NOT EXISTS `offer`(
-    `id` int(11) unsigined NOT NULL AUTO_INCREMENT,
+    `id` int(11) NOT NULL AUTO_INCREMENT,
     `url_token` int(11) NOT NULL,
     `created` int(11) NOT NULL,
     `member_id` int(11) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `offer`(
 
 
 CREATE TABLE IF NOT EXISTS `need`(
-    `id` int(11) unsigined NOT NULL AUTO_INCREMENT,
+    `id` int(11) NOT NULL AUTO_INCREMENT,
     `url_token` int(11) NOT NULL,
     `created` int(11) NOT NULL,
     `member_id` int(11) NOT NULL,
@@ -49,8 +49,7 @@ CREATE TABLE IF NOT EXISTS `follow_event`(
     `member_id` int(11) NOT NULL,
     `event_id` int(11) NOT NULL,
     `created` int(11) NOT NULL,
-    INDEX `member_id` (`member_id` ASC),
-    INDEX `event_id` (`event_id` ASC),
+    PRIMARY KEY (`member_id`, `event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -58,15 +57,20 @@ CREATE TABLE IF NOT EXISTS `follow_offer`(
     `member_id` int(11) NOT NULL,
     `offer_id` int(11) NOT NULL,
     `created` int(11) NOT NULL,
-    INDEX `member_id` (`member_id` ASC),
-    INDEX `offer_id` (`offer_id` ASC),
+    PRIMARY KEY (`member_id`, `offer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE IF NOT EXISTS `member_follow_need`(
+CREATE TABLE IF NOT EXISTS `follow_need`(
     `member_id` int(11) NOT NULL,
     `need_id` int(11) NOT NULL,
     `created` int(11) NOT NULL,
-    INDEX `member_id` (`member_id` ASC),
-    INDEX `need_id` (`need_id` ASC),
+    PRIMARY KEY (`member_id`, `need_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `follow_member`(
+    `member_id` int(11) NOT NULL,
+    `be_member_id` int(11) NOT NULL,
+    `created` int(11) NOT NULL,
+    PRIMARY KEY (`member_id`, `be_member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
