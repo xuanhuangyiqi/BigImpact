@@ -2,15 +2,34 @@
 
 class Admin_model extends CI_Model {
 
-    var $uid = '';
-    var $name = '';
-  
-
     function __construct()
     {
         parent::__construct();
     }
     
+    function get_entry_byemailandpassword($email,$password)
+    {
+        $this->db->select('*');
+        $this->db->from('admin');
+        $this->db->where('email',$email);
+        $this->db->where('passwd',$password);
+
+        $query = $this->db->get();
+
+        return $query->row_array();
+    }
+
+    function get_entry_byemail($email)
+    {
+        $this->db->select('*');
+        $this->db->from('admin');
+        $this->db->where('email',$email);
+
+        $query = $this->db->get();
+
+        return $query->row_array();
+    }
+
     function get_entry_byid($id)
     {
         $this->db->select('*');
@@ -18,34 +37,15 @@ class Admin_model extends CI_Model {
         $this->db->where('id',$id);
 
         $query = $this->db->get();
-        return $query->row_array();
 
-        //$sql = "SELECT * FROM user WHERE uid = ?";
-        //$query = $this->db->query($sql, array($uid));
-        //return $query->row_array();
+        return $query->row_array();
     }
 
-    function get_entry_bymail($mail)
-    {
-        $this->db->select('*');
-        $this->db->from('admin');
-        $this->db->where('email',$mail);
-
-        $query = $this->db->get();
-        return $query->row_array();
-
-        //$sql = "SELECT * FROM user WHERE uid = ?";
-        //$query = $this->db->query($sql, array($uid));
-        //return $query->row_array();
-    }
-
-
-    function insert_entry($member_data)
+    function insert_entry($admin)
     { 
-        $this->db->insert('admin', $member_data);
+        $this->db->insert('admin', $admin);
         return mysql_insert_id();
     }
-
 }
 
 /* End of user_model.php */

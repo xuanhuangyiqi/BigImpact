@@ -30,7 +30,7 @@ class Yuxiao extends REST_Controller
         {
             if($userdata['auth']==1)
             {
-                $stringJson = $this->put('stringJson');
+                $stringJson = $this->put('json');
                 $in=json_decode($stringJson, true);
        
                 $this->load->model('member_model', '', TRUE);

@@ -1,0 +1,32 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+/**
+ * 引用流程接入口 
+ */
+class Activity extends Pixel_Controller
+{		
+	public function __construct()
+	{
+		parent::__construct();		
+	}
+
+	public function index($page='')
+	{
+
+		if(empty($page))
+		{
+			$this->template['content'] = $this->load->view('activity_views',$this->template,TRUE);
+			$this->load->view('template_views',$this->template);
+		}
+		else
+		{
+			$this->template['js'] = $this->load->view("activity/".$page."_js_views",$this->template,TRUE);
+			$this->template['content'] = $this->load->view("activity/".$page."_views",$this->template,TRUE);
+			$this->load->view('template_views',$this->template);
+		}
+		
+	}
+}
+
+/* End of file activity.php */
+/* Location: ./application/controllers/activity.php */
