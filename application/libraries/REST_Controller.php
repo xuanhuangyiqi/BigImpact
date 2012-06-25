@@ -132,6 +132,8 @@ abstract class REST_Controller extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		
+		$this->load->library('session');
 
 		$this->_zlib_oc = @ini_get('zlib.output_compression');
 
