@@ -75,6 +75,18 @@ class Member_model extends CI_Model {
         $this->db->delete('member', array('id' => $id)); 
         return 1;
     }
+    function ids2tokens($ids)
+    {
+        $this->db->select('id, url_token');
+        $this->db->from('member');
+        $this->db->where_in('id', $ids);
+        $query = $this->db->get();
+        $query = $query->result_array();
+        $res = array();
+        foreach ($query as &$x)
+            $res[$x['id']] = $x['url_token'];
+        return $res;
+    }
 }
 
 /* End of user_model.php */
