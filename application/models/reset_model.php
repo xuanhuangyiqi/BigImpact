@@ -27,7 +27,7 @@ class Reset_model extends CI_Model {
        
         
         $data = array(
-               'email' => '123456' ,
+               'email' => '123456@omar.com' ,
                'passwd' => '123456',
                'created' => '0000000001',
                'first_name' => 'omarhub',
@@ -37,7 +37,7 @@ class Reset_model extends CI_Model {
         
         $data = array(
                 'created' => '0000000001',
-                'email' => '123456' ,
+                'email' => '123456@omar.com' ,
                 'passwd' => '123456',
                 'first_name' => 'omarhub',
                 'last_name' => 'fellow',

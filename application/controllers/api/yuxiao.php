@@ -167,7 +167,7 @@ class Yuxiao extends REST_Controller
        
        //通过member的url_token获得member的id
         $this->load->model('member_model', '', TRUE);
-        $member_token  =  $in['member_url_token'];     
+        $member_token  =  $in['member_id'];     
         $member = $this->member_model->get_entry_bytoken($member_token);
 
 
@@ -182,7 +182,7 @@ class Yuxiao extends REST_Controller
 
              if(empty($array))
              {
-                $this->response(array('error' => 'member no  '), 400);
+                $this->response(array('error' => 'member no  offer '), 400);
              }
 
              $offer_ids = array();
