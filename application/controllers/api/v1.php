@@ -356,7 +356,288 @@ class V1 extends REST_Controller
         }
         
     }
-      
+
+    function offer_post()
+    {
+        $userdata=$this->session->userdata('userdata');
+
+        if(empty($userdata))
+        {
+            $this->response(array('error' => 'not login'), 403);
+        }
+        else
+        {
+            if($userdata['auth']==1)
+            {
+                $json = $this->post('json');
+                $arr = json_decode($json,TRUE); //$arr includes member_id and all the information that an offer needs
+                $title=$arr['title'];   
+                $id=$userdata['url_token'];
+
+                if(!empty($id)&&!empty($title))
+                {
+                    $this->load->model('offer_model','',TRUE);
+                    $this->load->model('member_model','',TRUE);
+
+                    $arr["created"]=time();
+
+                    $temp=$this->member_model->get_entry_bytoken($id);
+                    $arr['member_id']=$temp['id'];
+                    $member_id=$arr['member_id'];
+
+
+                    if(empty($member_id))
+                    {
+                        $this->response('no such user','400');
+                    }
+                    
+                    $arr['url_token'] = rand() % 1000000;
+
+                    $offer_data['title']=$arr['title'];
+                    $offer_data['member_id']=$arr['member_id'];
+                    $offer_data['created']=$arr['created'];
+                    $offer_data['url_token']=$arr['url_token'];
+                    $offer_data['description']=$arr['description'];
+                    $offer_data['fields']=$arr['fields'];
+                    $offer_data['locations']=$arr['locations'];
+                    $offer_data['target']=$arr['target'];
+
+                    $offer = $this->offer_model->insert_entry($offer_data);
+
+                    if(!empty($offer))
+                    {
+                        $this->response($offer,200);
+                    }
+                    else
+                    {
+                        $this->response(array('error' => 'id error'),400);
+                    }
+                }
+                else
+                {
+                    $this->response(array('error' => $id,'error2' => $title,'json'=>$arr),400);
+                }
+            }
+       
+            else
+            {
+                $this->response(array('error' => 'you are not a member'), 403);
+            }
+
+        }
+    }
+    function follow_offer_post()
+    {
+        $userdata=$this->session->userdata('userdata');
+
+        if(empty($userdata))
+        {
+            $this->response(array('error' => 'not login'), 403);
+        }
+        else
+        {
+            if($userdata['auth']==1)
+            {
+
+                $stringJson = $this->post('json');
+
+
+                $in=json_decode($stringJson, true);
+            
+
+               //通过member的url_token获得member的id
+                $this->load->model('member_model', '', TRUE);  
+                $member_token  =  $userdata['url_token'];    
+                $member = $this->member_model->get_entry_bytoken($member_token);
+                
+
+               //通过offer的url_token获得offer的id
+                $this->load->model('offer_model', '', TRUE);
+                $offer_token  =  $in['offer_url_token'];     
+                $offer = $this->offer_model->get_entry_bytoken($offer_token);
+
+                
+                
+
+                if(!empty($member)&& !empty($offer))
+                {
+                     $member_id = $member['id'];
+                     $offer_id = $offer['id'];
+
+
+
+                     $follow_offer_data['member_id'] = $member_id;
+                     $follow_offer_data['created'] = time();
+                     $follow_offer_data['offer_id'] = $offer_id;
+
+                     $this->load->model('followoffer_model','',TRUE);
+
+                     $res = $this->followoffer_model->insert_entry($follow_offer_data);
+
+                     $this->response(array('error'=>'insert success'), 200);
+                    
+                }
+                else
+                {
+                     $this->response(array('error' => 'no such member or no such offer'), 400);
+                }
+            }
+       
+            else
+            {
+                $this->response(array('error' => 'you are not a member'), 403);
+            }
+
+        }
+    }
+    function follow_offer_delete()
+    {
+        $userdata=$this->session->userdata('userdata');
+
+        if(empty($userdata))
+        {
+            $this->response(array('error' => 'not login'), 403);
+        }
+        else
+        {
+            if($userdata['auth']==1)
+            {
+                $stringJson = $this->delete('json');
+
+                $in=json_decode($stringJson, true);
+               
+               //通过member的url_token获得member的id
+                $this->load->model('member_model', '', TRUE);
+                $member_token  =  $userdata['url_token'];    
+                $member = $this->member_model->get_entry_bytoken($member_token);
+
+                //$this->response($in['member_url_token'], 200);
+
+                //通过offer的url_token获得offer的id
+                $this->load->model('offer_model', '', TRUE);
+                $offer_token  =  $in['offer_url_token'];     
+                $offer = $this->offer_model->get_entry_bytoken($offer_token);
+
+                if(!empty($member)&& !empty($offer))
+                {
+                     $member_id = $member['id'];
+                     $offer_id = $offer['id'];
+
+
+                     $this->load->model('followoffer_model','',TRUE);
+
+                     $res = $this->followoffer_model->delete_entry($member_id,$offer_id);
+
+                     if ($res == 1)
+                     {
+                           $this->response(array('error' =>'delete success'), 200);
+                     }
+                     else
+                     {
+                          $this->response(array('error' => 'delete error'), 400);
+                     }
+                }
+                else
+                {
+                     $this->response(array('error' => 'no such member or no such offer'), 400);
+                }
+            }
+       
+            else
+            {
+                $this->response(array('error' => 'you are not a member'), 403);
+            }
+
+        }
+    }
+
+    function offer_get()//$member_id(member_token)='',$time_stamp='now',$num='10',$orderby='created',$offer_id(offer_token)=''
+    {
+          $this->load->model('member_model','',TRUE);
+        $json = $this->get('json');
+        $arr = json_decode($json,TRUE);
+
+        //$this->response($arr,200);
+        $offer_token = $arr['offer_id'];
+
+        $this->load->model('offer_model','',TRUE);
+
+        if(!empty($offer_token))
+        {
+            //$offer_token=$this->session->userdata('id');
+            $offer_detail=$this->offer_model->get_entry_bytoken($offer_token);
+     
+            if(!empty($offer_detail))
+            {      
+                $token_arr = $this->member_model->ids2tokens(array($offer_detail['member_id']));
+                //$this->response($token_arr,200);
+                $offer_detail['member_id'] = $token_arr[$offer_detail['member_id']];
+                $this->response($offer_detail,200);
+            }
+            else
+                $this->response('no such offer',400);
+        }
+            
+            
+        $number=$arr['num'];
+        $time_stamp=$arr['time_stamp'];
+        $orderby=$arr['orderby'];
+        $member_token=$arr['member_id'];
+
+        if(empty($number))
+            $number=15;
+
+        if(empty($time_stamp))
+        {
+            $time_stamp=time();
+        }
+        
+        if(empty($orderby))
+            $orderby='created';
+
+        
+        if(!empty($member_token))
+        {
+          
+            $temp=$this->member_model->get_entry_bytoken($member_token);
+            if(!empty($temp))
+                $member_id=$temp['id'];
+            else
+                $this->response('wrong user id',400);
+        }
+        else
+        {
+            $member_id=$member_token;
+        }
+        
+        $offer = $this->offer_model->get_data_bytoken($member_id,$time_stamp,$number,$orderby);
+
+        if(!empty($offer))
+        {
+            //unset($offer['id']);
+            
+            $aarr = array();
+            foreach ($offer as $x)
+                array_push($aarr, $x['member_id']);
+         
+            $ids2tokens = $this->member_model->ids2tokens($aarr);
+           // $this->response($ids2tokens,200);
+            foreach ($offer as &$x)
+            {
+
+                $x['member_id'] = $ids2tokens[($x['member_id'])];
+                //$this->response($ids2tokens,200);
+                unset($x['id']);
+            }
+            $this->response($offer,200);
+            
+        }
+        else
+        {
+            $this->response('no token', 400);
+        }   
+    }
+    
 }
 
 
