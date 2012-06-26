@@ -19,6 +19,28 @@ class Offer_model extends CI_Model {
         return $query->row_array();
 	}
 
+
+
+    function get_data_byids($offer_ids)
+    {
+        $this->db->select('*');
+        $this->db->from('offer');
+        $this->db->where_in('id',$offer_ids);
+
+
+        $query = $this->db->get();
+
+        if($query->num_rows()>0)
+        {
+            $result=$query->result_array();
+            return $result;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     function get_data_bytoken($member_id,$time_stamp,$number,$orderby)
     {
         $this->db->select('*');

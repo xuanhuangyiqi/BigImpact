@@ -156,6 +156,84 @@ class Yuxiao extends REST_Controller
         }
     }
 
+    function member_follow_offer_get()
+    {
+       
+        $stringJson = $this->get('json');
+
+        $in=json_decode($stringJson, true);
+
+        
+       
+       //通过member的url_token获得member的id
+        $this->load->model('member_model', '', TRUE);
+        $member_token  =  $in['member_url_token'];     
+        $member = $this->member_model->get_entry_bytoken($member_token);
+
+
+        //根据member_id取关注的offer_id
+        if(!empty($member))
+        {
+             $member_id = $member['id'];
+
+             $this->load->model('followoffer_model','',TRUE);
+
+             $array = $this->followoffer_model->get_offerid_bymemberid($member_id);
+
+             if(empty($array))
+             {
+                $this->response(array('error' => 'member no  '), 400);
+             }
+
+             $offer_ids = array();
+
+             foreach ($array as &$value) 
+             {
+                 unset($value['member_id']);
+                 unset($value['created']);
+                 array_push($offer_ids,$value['offer_id']); 
+             }
+
+             //$this->response($offer_ids, 200);
+
+             $this->load->model('offer_model','',TRUE);
+
+             $offer = $this->offer_model->get_data_byids($offer_ids);
+
+
+
+            if(!empty($offer))
+            {
+                //unset($offer['id']);
+                
+                $aarr = array();
+                foreach ($offer as $x)
+                    array_push($aarr, $x['member_id']);
+             
+                $ids2tokens = $this->member_model->ids2tokens($aarr);
+               // $this->response($ids2tokens,200);
+                foreach ($offer as &$x)
+                {
+
+                    $x['member_id'] = $ids2tokens[($x['member_id'])];
+                    //$this->response($ids2tokens,200);
+                    unset($x['id']);
+                }
+                $this->response($offer,200);
+                
+            }
+            else
+            {
+                $this->response(array('error' => 'no offer'), 400);
+            }  
+
+             
+        }
+        else
+        {
+             $this->response(array('error' => 'no such member '), 400);
+        }
+    }
 
 
 }

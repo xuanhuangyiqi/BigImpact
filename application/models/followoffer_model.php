@@ -7,6 +7,28 @@ class Followoffer_model extends CI_Model {
         parent::__construct();
     }
     
+
+    function get_offerid_bymemberid($member_id)
+    {
+        //echo 'this is get_entry_bytoken';
+        $this->db->select('*');
+        $this->db->from('follow_offer');
+        $this->db->where('member_id',$member_id);
+        
+        $query = $this->db->get();
+    
+        
+        if($query->num_rows()>0)
+        {
+            $result=$query->result_array();
+            return $result;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     function insert_entry($follow_offer_data)
     { 
 
