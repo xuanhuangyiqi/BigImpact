@@ -30,7 +30,7 @@ class Yuxiao extends REST_Controller
         {
             if($userdata['auth']==1)
             {
-                $stringJson = $this->put('json');
+                $stringJson = $this->put('stringJson');
                 $in=json_decode($stringJson, true);
        
                 $this->load->model('member_model', '', TRUE);
@@ -64,4 +64,98 @@ class Yuxiao extends REST_Controller
 
         }
     }
+
+    function follow_offer_post()
+    {
+        
+        $stringJson = $this->post('json');
+
+
+        $in=json_decode($stringJson, true);
+    
+
+       //通过member的url_token获得member的id
+        $this->load->model('member_model', '', TRUE);  
+        $member_token  =  $in['member_url_token'];     
+        $member = $this->member_model->get_entry_bytoken($member_token);
+        
+
+       //通过offer的url_token获得offer的id
+        $this->load->model('offer_model', '', TRUE);
+        $offer_token  =  $in['offer_url_token'];     
+        $offer = $this->offer_model->get_entry_bytoken($offer_token);
+
+        
+        
+
+        if(!empty($member)&& !empty($offer))
+        {
+             $member_id = $member['id'];
+             $offer_id = $offer['id'];
+
+
+
+             $follow_offer_data['member_id'] = $member_id;
+             $follow_offer_data['created'] = time();
+             $follow_offer_data['offer_id'] = $offer_id;
+
+             $this->load->model('followoffer_model','',TRUE);
+
+             $res = $this->followoffer_model->insert_entry($follow_offer_data);
+
+             $this->response(array('error'=>'insert success'), 200);
+            
+        }
+        else
+        {
+             $this->response(array('error' => 'no such member or no such offer'), 400);
+        }
+    }
+
+    function follow_offer_delete()
+    {
+       
+        $stringJson = $this->delete('json');
+
+        $in=json_decode($stringJson, true);
+       
+       //通过member的url_token获得member的id
+        $this->load->model('member_model', '', TRUE);
+        $member_token  =  $in['member_url_token'];     
+        $member = $this->member_model->get_entry_bytoken($member_token);
+
+        //$this->response($in['member_url_token'], 200);
+
+        //通过offer的url_token获得offer的id
+        $this->load->model('offer_model', '', TRUE);
+        $offer_token  =  $in['offer_url_token'];     
+        $offer = $this->offer_model->get_entry_bytoken($offer_token);
+
+        if(!empty($member)&& !empty($offer))
+        {
+             $member_id = $member['id'];
+             $offer_id = $offer['id'];
+
+
+             $this->load->model('followoffer_model','',TRUE);
+
+             $res = $this->followoffer_model->delete_entry($member_id,$offer_id);
+
+             if ($res == 1)
+             {
+                   $this->response(array('error' =>'delete success'), 200);
+             }
+             else
+             {
+                  $this->response(array('error' => 'delete error'), 400);
+             }
+        }
+        else
+        {
+             $this->response(array('error' => 'no such member or no such offer'), 400);
+        }
+    }
+
+
+
 }
