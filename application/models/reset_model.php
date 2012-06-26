@@ -11,17 +11,24 @@ class Reset_model extends CI_Model {
     {
     
         $this->db->empty_table('admin'); 
-        $this->db->empty_table('auth'); 
+        $this->db->empty_table('auth');
+        $this->db->empty_table('event');
+        $this->db->empty_table('follow_event');  
+        $this->db->empty_table('follow_member');  
+        $this->db->empty_table('follow_need');  
+        $this->db->empty_table('follow_offer');    
         $this->db->empty_table('job'); 
         $this->db->empty_table('language');
         $this->db->empty_table('location'); 
-        $this->db->empty_table('member'); 
+        $this->db->empty_table('member');
+        $this->db->empty_table('need');
+        $this->db->empty_table('offer');     
         $this->db->empty_table('register_queue');  
        
         
         $data = array(
-               'email' => 'omarhub@vip.qq.com' ,
-               'passwd' => '000000',
+               'email' => '123456' ,
+               'passwd' => '123456',
                'created' => '0000000001',
                'first_name' => 'omarhub',
                'last_name' => 'admin'
@@ -30,8 +37,8 @@ class Reset_model extends CI_Model {
         
         $data = array(
                 'created' => '0000000001',
-                'email' => 'omarhub@vip.qq.com' ,
-                'passwd' => '000000',
+                'email' => '123456' ,
+                'passwd' => '123456',
                 'first_name' => 'omarhub',
                 'last_name' => 'fellow',
                 'mail_option' => '1',
@@ -51,7 +58,7 @@ class Reset_model extends CI_Model {
                 'url_token'  =>  '000001',
                 'avatar_path' => 'http://img.baidu.com/img/iknow/avarta/48/r6s1g6.gif'
             );
-        $this->db->insert('member', $data); 
+        $this->db->insert('member', $data);
         
         return 0;
         
