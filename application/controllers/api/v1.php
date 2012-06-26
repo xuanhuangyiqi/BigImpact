@@ -634,7 +634,8 @@ class V1 extends REST_Controller
         }
         else
         {
-            $this->response('no token', 400);
+            offer = array()
+            $this->response(offer, 200);
         }   
     }
     
