@@ -312,6 +312,11 @@ class V2 extends REST_Controller
         $out['organization_phone_number'] = $fellow['organization_phone_number'];
         $out['home_mail'] = $fellow['home_mail'];
         $out['business_mail'] = $fellow['business_mail'];
+
+        $img = md5( strtolower( trim( $out['email'] ) ) );
+        $out['img'] = "http://www.gravatar.com/avatar/".$img;
+
+
         
     
         $this->response($out, 200);
