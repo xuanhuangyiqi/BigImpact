@@ -178,7 +178,7 @@ class V2 extends REST_Controller
         $data['created'] = time();
             
         $this->admin_model->insert_entry($data);
-        /*
+     
         //发送邮件。
         {
             $this->load->library('email');
@@ -189,7 +189,7 @@ class V2 extends REST_Controller
             $this->email->message($html);  
             $this->email->send();
         }
-        */
+       
         $out['email'] = $data['email'];
         $out['first_name'] = $data['first_name'];
         $out['last_name'] = $data['last_name'];
@@ -232,7 +232,7 @@ class V2 extends REST_Controller
         $data['fellow_url_token'] = rand() % 1000000;
             
         $this->fellow_model->insert_entry($data);
-        /*
+        
         //发送邮件。
         {
             $this->load->library('email');
@@ -243,7 +243,7 @@ class V2 extends REST_Controller
             $this->email->message($html);  
             $this->email->send();
         }
-        */
+
         $out['email'] = $data['email'];
         $out['first_name'] = $data['first_name'];
         $out['last_name'] = $data['last_name'];
