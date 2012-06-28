@@ -316,9 +316,6 @@ class V2 extends REST_Controller
         $img = md5( strtolower( trim( $out['email'] ) ) );
         $out['img'] = "http://www.gravatar.com/avatar/".$img;
 
-
-        
-    
         $this->response($out, 200);
         
     }
@@ -727,12 +724,12 @@ class V2 extends REST_Controller
 
         $this->load->model('follow_offer_model','',TRUE);
         $offersarray = $this->follow_offer_model->get_offerid_byfellow_id($fellow_id);
-
+        /*
         if(empty($offersarray))
         {
              $this->response(array('error'=>'this fellow does not follow any offer'),400);            
         }
-
+        */
         $offer_ids = array();
 
         foreach ($offersarray as &$value) 
@@ -783,12 +780,13 @@ class V2 extends REST_Controller
         $fellows = $this->fellow_model->get_entrys_byfellow_ids($fellow_ids);
         foreach($fellows as $key => $value)
         {
-            $out[$key]['created'] = $value['created'];
-            $out[$key]['location'] = $value['location']; 
-            $out[$key]['target'] = $value['target'];
-            $out[$key]['author_id'] = $value['fellow_url_token'];
-            $out[$key]['author_first_name'] = $value['first_name']; 
-            $out[$key]['author_last_name'] = $value['last_name']; 
+            $out[$key]['fellow_id'] = $value['fellow_url_token'];
+            $out[$key]['first_name'] = $value['first_name']; 
+            $out[$key]['last_name'] = $value['last_name']; 
+            $out[$key]['email'] = $value['email'];
+
+            $img = md5( strtolower( trim( $out[$key]['email'] ) ) );
+            $out[$key]['img'] = "http://www.gravatar.com/avatar/".$img;
         }
         $this->response($out, 200);
     }
@@ -833,7 +831,7 @@ class V2 extends REST_Controller
 
     }
     
-    //6-2:取消关注一个fellow
+    //7-2:取消关注一个fellow
     function followfellow_delete($be_fellow_id='')
     {
         $fellow_url_token = $this->_auth_fellow(); 
@@ -869,7 +867,7 @@ class V2 extends REST_Controller
 
     }
 
-    //6-3:获取当前fellow关注的fellow
+    //7-3:获取当前fellow关注的fellow
     function followfellow_get($fellow_id='')
     {
         $fellow_url_token = $fellow_id; 
@@ -893,12 +891,12 @@ class V2 extends REST_Controller
 
         $this->load->model('follow_fellow_model','',TRUE);
         $be_fellowsarray = $this->follow_fellow_model->get_be_fellowid_byfellow_id($fellow_id);
-
+        /*
         if(empty($be_fellowsarray))
         {
              $this->response(array('error'=>'this fellow does not follow any be_fellow'),400);            
         }
-
+        */
         $be_fellow_ids = array();
 
         foreach ($be_fellowsarray as &$value) 
@@ -912,14 +910,18 @@ class V2 extends REST_Controller
        
         foreach ($be_fellows as $key => $value) 
         {
-            $out[$key]['author_id'] = $value['fellow_url_token'];
-            $out[$key]['author_first_name'] = $value['first_name']; 
-            $out[$key]['author_last_name'] = $value['last_name']; 
+            $out[$key]['fellow_id'] = $value['fellow_url_token'];
+            $out[$key]['first_name'] = $value['first_name']; 
+            $out[$key]['last_name'] = $value['last_name'];
+            $out[$key]['email'] = $value['email'];
+
+            $img = md5( strtolower( trim( $out[$key]['email'] ) ) );
+            $out[$key]['img'] = "http://www.gravatar.com/avatar/".$img;             
         }
 
         $this->response($out,200);
     }
-    //6-4:获取关注当前fellow的fellow
+    //7-4:获取关注当前fellow的fellow
     function befollowfellow_get($be_fellow_id='')
     {
         $be_fellow_url_token = $be_fellow_id; 
@@ -943,12 +945,12 @@ class V2 extends REST_Controller
 
         $this->load->model('follow_fellow_model','',TRUE);
         $fellowsarray = $this->follow_fellow_model->get_fellowid_bybe_fellow_id($be_fellow_id);
-
+        /*
         if(empty($fellowsarray))
         {
              $this->response(array('error'=>'this fellow is not be followed'),400);            
         }
-
+        */
         $fellow_ids = array();
 
         foreach ($fellowsarray as &$value) 
@@ -960,9 +962,13 @@ class V2 extends REST_Controller
        
         foreach ($fellows as $key => $value) 
         {
-            $out[$key]['author_id'] = $value['fellow_url_token'];
-            $out[$key]['author_first_name'] = $value['first_name']; 
-            $out[$key]['author_last_name'] = $value['last_name']; 
+            $out[$key]['fellow_id'] = $value['fellow_url_token'];
+            $out[$key]['first_name'] = $value['first_name']; 
+            $out[$key]['last_name'] = $value['last_name']; 
+            $out[$key]['email'] = $value['email'];
+            
+            $img = md5( strtolower( trim( $out[$key]['email'] ) ) );
+            $out[$key]['img'] = "http://www.gravatar.com/avatar/".$img;  
         }
 
         $this->response($out,200);
