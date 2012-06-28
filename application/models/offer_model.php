@@ -7,6 +7,18 @@ class Offer_model extends CI_Model {
 		parent::__construct();
 	}
 
+    function get_entrys_byoffer_ids($offer_ids)
+    {
+        $this->db->select('offer.*,fellow.fellow_url_token,fellow.first_name,fellow.last_name');
+        $this->db->from('offer');
+        $this->db->join('fellow','offer.fellow_id = fellow.id');
+        $this->db->where_in('offer.id',$offer_ids); 
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
 	function get_entry_byoffer_url_token($offer_url_token)
 	{
 	    $this->db->select('offer.*,fellow.fellow_url_token,fellow.first_name,fellow.last_name');

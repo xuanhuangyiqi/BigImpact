@@ -617,6 +617,67 @@ class V2 extends REST_Controller
         }
 
     }
+
+    //6-3:获取当前fellow关注的offer
+    function myfollowoffers_get($fellow_id='')
+    {
+        $fellow_url_token = $fellow_id; 
+
+        if(empty($fellow_url_token))
+        {
+            $this->response(array('error' => 'no fellow id '), 400);
+        }
+
+        $this->load->model('fellow_model','',TRUE);
+        $fellow=$this->fellow_model->get_entry_byfellow_url_token($fellow_url_token);
+
+        if(empty($fellow))
+        {
+            $this->response(array('error'=>'no this fellow_url_token'),400);
+        }
+
+        $fellow_id = $fellow['id'];
+        
+
+
+        $this->load->model('follow_offer_model','',TRUE);
+        $offersarray = $this->follow_offer_model->get_offerid_byfellow_id($fellow_id);
+
+        if(empty($offersarray))
+        {
+             $this->response(array('error'=>'this fellow does not follow any offer'),400);            
+        }
+
+        $offer_ids = array();
+
+        foreach ($offersarray as &$value) 
+        {
+             unset($value['member_id']);
+             unset($value['created']);
+             array_push($offer_ids,$value['offer_id']); 
+        }
+
+        $this->load->model('offer_model','',TRUE);
+
+        $offers = $this->offer_model->get_entrys_byoffer_ids($offer_ids);
+       
+        foreach ($offers as $key => $value) 
+        {
+            $out[$key]['offer_id'] = $value['offer_url_token']; 
+            $out[$key]['title'] = $value['title'];
+            $out[$key]['created'] = $value['created'];
+            $out[$key]['description'] = $value['description'];
+            $out[$key]['fields'] = $value['fields'];
+            $out[$key]['locations'] = $value['locations']; 
+            $out[$key]['target'] = $value['target'];
+            $out[$key]['author_id'] = $value['fellow_url_token'];
+            $out[$key]['author_first_name'] = $value['first_name']; 
+            $out[$key]['author_last_name'] = $value['last_name']; 
+
+        }
+
+        $this->response($out,200);
+    }
 }
 
 
