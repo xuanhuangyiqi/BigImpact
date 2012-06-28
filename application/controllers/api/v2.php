@@ -891,12 +891,12 @@ class V2 extends REST_Controller
 
         $this->load->model('follow_fellow_model','',TRUE);
         $be_fellowsarray = $this->follow_fellow_model->get_be_fellowid_byfellow_id($fellow_id);
-        /*
+        
         if(empty($be_fellowsarray))
         {
-             $this->response(array('error'=>'this fellow does not follow any be_fellow'),400);            
+            $this->response(array(),200);            
         }
-        */
+
         $be_fellow_ids = array();
 
         foreach ($be_fellowsarray as &$value) 
@@ -945,12 +945,12 @@ class V2 extends REST_Controller
 
         $this->load->model('follow_fellow_model','',TRUE);
         $fellowsarray = $this->follow_fellow_model->get_fellowid_bybe_fellow_id($be_fellow_id);
-        /*
+        
         if(empty($fellowsarray))
         {
-             $this->response(array('error'=>'this fellow is not be followed'),400);            
+             $this->response(array(),200);            
         }
-        */
+
         $fellow_ids = array();
 
         foreach ($fellowsarray as &$value) 
