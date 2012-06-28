@@ -11,53 +11,204 @@ class Reset_model extends CI_Model {
     {
     
         $this->db->empty_table('admin'); 
-        $this->db->empty_table('auth'); 
-        $this->db->empty_table('job'); 
-        $this->db->empty_table('language');
-        $this->db->empty_table('location'); 
-        $this->db->empty_table('member'); 
-        $this->db->empty_table('register_queue');  
-       
+        $this->db->empty_table('fellow');
+        $this->db->empty_table('follow_fellow');    
+        $this->db->empty_table('offer');     
+
+        $query = $this->db->query('truncate table admin');
+        $query = $this->db->query('truncate table fellow');
+        $query = $this->db->query('truncate table offer');
+        $query = $this->db->query('truncate table follow_fellow');
         
         $data = array(
-               'email' => 'omarhub@vip.qq.com' ,
-               'passwd' => '000000',
+               'email' => '123456@omar.com' ,
+               'password' => '123456',
                'created' => '0000000001',
                'first_name' => 'omarhub',
                'last_name' => 'admin'
             );
+
         $this->db->insert('admin', $data);
-        
+
+
         $data = array(
                 'created' => '0000000001',
-                'email' => 'omarhub@vip.qq.com' ,
-                'passwd' => '000000',
+                'email' => '123456@omar.com' ,
+                'password' => '123456',
                 'first_name' => 'omarhub',
                 'last_name' => 'fellow',
-                'mail_option' => '1',
-                'mail' => 'No 18 Buaa',
                 'mobile_country_code' => '010',
                 'mobile' => 'China Unicom',
-                'country' => 'China',
-                'zip' => '100191',
-                'state' => 'haidian',
-                'city' => 'Beijing',
-                'street' => 'Xueyuan Road',
+                'home_country' => 'China',
+                'home_zip' => '100191',
+                'home_state' => 'haidian',
+                'home_city' => 'Beijing',
+                'home_street' => 'Xueyuan Road',
+                'business_country' => 'China',
+                'business_zip' => '100191',
+                'business_state' => '西城',
+                'business_city' => 'Beijing',
+                'business_street' => 'Tianan Road',
                 'target' => 'Education',
                 'location' => 'Buaa',
                 'job' => 'IT',
                 'language' => 'Chinese',
                 'gender' => '1',
-                'url_token'  =>  '000001',
-                'avatar_path' => 'http://img.baidu.com/img/iknow/avarta/48/r6s1g6.gif'
+                'fellow_url_token'  =>  '100001',
+                'skype_id' => 'i@skype.com',
+                'home_mail' => 'home...mail',
+                'business_mail' =>'business_mail',
+                'organization_name' => '130',
+                'organization_acronym' => '',
+                'date_organization_formed' => '19900101',
+                'organization_website_url' => '130.huiter.me',
+                'organization_type' => '',
+                'number_of_employees' => '130',
+                'organization_estimated_annual_budget' => '',
+                'organization_phone_number_country_code' => '',
+                'organization_phone_number' => ''
             );
-        $this->db->insert('member', $data); 
-        
-        return 0;
-        
 
+        $this->db->insert('fellow', $data); 
+
+                $data = array(
+                'created' => '0000000002',
+                'email' => 'huiter@vip.qq.com' ,
+                'password' => 'huiter',
+                'first_name' => 'hui',
+                'last_name' => 'ter',
+                'mobile_country_code' => '010',
+                'mobile' => '15210832621',
+                'home_country' => 'China',
+                'home_zip' => '100191',
+                'home_state' => 'haidian',
+                'home_city' => 'Beijing',
+                'home_street' => 'Xueyuan Road',
+                'business_country' => 'China',
+                'business_zip' => '100191',
+                'business_state' => '西城',
+                'business_city' => 'Beijing',
+                'business_street' => 'Tianan Road',
+                'target' => 'Education',
+                'location' => 'Buaa',
+                'job' => 'IT',
+                'language' => 'Chinese',
+                'gender' => '1',
+                'fellow_url_token'  =>  '100002',
+                'skype_id' => 'i@skype.com',
+                'home_mail' => 'home...mail',
+                'business_mail' =>'business_mail',
+                'organization_name' => '130',
+                'organization_acronym' => '',
+                'date_organization_formed' => '19900101',
+                'organization_website_url' => '130.huiter.me',
+                'organization_type' => '',
+                'number_of_employees' => '130',
+                'organization_estimated_annual_budget' => '',
+                'organization_phone_number_country_code' => '',
+                'organization_phone_number' => ''
+            );
+
+        $this->db->insert('fellow', $data);   
+
+                $data = array(
+                'created' => '0000000003',
+                'email' => '100524333@qq.com' ,
+                'password' => 'huiter',
+                'first_name' => 'chen',
+                'last_name' => 'qi',
+                'mobile_country_code' => '010',
+                'mobile' => '...',
+                'home_country' => 'China',
+                'home_zip' => '100191',
+                'home_state' => 'haidian',
+                'home_city' => 'Beijing',
+                'home_street' => 'Xueyuan Road',
+                'business_country' => 'China',
+                'business_zip' => '100191',
+                'business_state' => '西城',
+                'business_city' => 'Beijing',
+                'business_street' => 'Tianan Road',
+                'target' => 'Education',
+                'location' => 'Buaa',
+                'job' => 'IT',
+                'language' => 'Chinese',
+                'gender' => '1',
+                'fellow_url_token'  =>  '100003',
+                'skype_id' => 'i@skype.com',
+                'home_mail' => 'home...mail',
+                'business_mail' =>'business_mail',
+                'organization_name' => '130',
+                'organization_acronym' => '',
+                'date_organization_formed' => '19900101',
+                'organization_website_url' => '130.huiter.me',
+                'organization_type' => '',
+                'number_of_employees' => '130',
+                'organization_estimated_annual_budget' => '',
+                'organization_phone_number_country_code' => '',
+                'organization_phone_number' => ''
+            );
+
+        $this->db->insert('fellow', $data); 
+
+        $data = array(
+               'offer_url_token'=>'40798',
+               'created'=>'1340673285',
+               'fellow_id'=>'3',
+               'title'=>'The fund for the poor children',
+               'description'=>'We want to help the poor children in Asia. When they encounter the bad situation,they can get help here',
+               'fields'=>'Education',
+               'locations'=>'Vietnam',
+               'target'=>'Youth'
+            );
+        $this->db->insert('offer', $data); 
+        $data = array(
+               'offer_url_token'=>'40799',
+               'created'=>'1340673290',
+               'fellow_id'=>'2',
+               'title'=>'Solution to the poor health',
+               'description'=>'A healthy plan for the people who suffer the disease',
+               'fields'=>'Health',
+               'locations'=>'China',
+               'target'=>'All people'
+            );
+         $this->db->insert('offer', $data); 
+        $data = array(
+               'offer_url_token'=>'40728',
+               'created'=>'1340673370',
+               'fellow_id'=>'2',
+               'title'=>'Offer the opportunity for the unemployed',
+               'description'=>'Help you survive the financial crisis ',
+               'fields'=>'Job',
+               'locations'=>'Greece',
+               'target'=>'adult'
+            );
+         $this->db->insert('offer', $data); 
+        $data = array(
+               'offer_url_token'=>'40876',
+               'created'=>'1340674356',
+               'fellow_id'=>'1',
+               'title'=>'Kill the cancer',
+               'description'=>'We offer the money to help the people in despair',
+               'fields'=>'Health',
+               'locations'=>'South Africa',
+               'target'=>'Youth'
+            );
+         $this->db->insert('offer', $data); 
+        $data = array(
+               'offer_url_token'=>'40879',
+               'created'=>'1340675344',
+               'fellow_id'=>'3',
+               'title'=>'Free chance to learn the first aid',
+               'description'=>'We want to help the poor children in Asia. When they encounter the bad situation,they can get help here',
+               'fields'=>'Aid',
+               'locations'=>'Afghanistan',
+               'target'=>'Young Girls'
+            );     
+         $this->db->insert('offer', $data); 
+        return 0;
     }
 }
 
-/* End of user_model.php */
-/* Location: ./system/application/controllers/user_model.php */
+/* End of reset_model.php */
+/* Location: ./system/application/model/reset_model.php */
