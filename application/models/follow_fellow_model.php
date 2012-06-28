@@ -16,9 +16,17 @@ class Follow_fellow_model extends CI_Model {
         $query = $this->db->get();
         
         return $query->result_array();
-
     }
 
+    function get_fellowid_bybe_fellow_id($fellow_id)
+    {
+        $this->db->select('*');
+        $this->db->from('follow_fellow');
+        $this->db->where('be_fellow_id',$fellow_id);
+        $query = $this->db->get();
+        
+        return $query->result_array();
+    }
     function insert_entry($follow_be_fellow_data)
     { 
         $insert_query = $this->db->insert_string('follow_fellow',$follow_be_fellow_data);
