@@ -16,7 +16,16 @@ class Follow_offer_model extends CI_Model {
         $query = $this->db->get();
         
         return $query->result_array();
+    }
 
+    function get_fellowid_by_offer_id($offer_id)
+    {
+        $this->db->select('*');
+        $this->db->from('follow_offer');
+        $this->db->where_in('offer_id', $offer_id);
+        $query = $this->db->get();
+        
+        return $query->result_array();
     }
 
     function insert_entry($follow_offer_data)
