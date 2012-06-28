@@ -391,6 +391,26 @@
                 }
             });
           });
+          $("#6-4").click(function(e) {
+          e.preventDefault();
+                $.ajax({
+                url : 'api/v2/offerfollower/40799',
+                type : 'GET',
+                data　: {},
+                complete:function(x,t){
+                  if(x.status==200)
+                  {
+                    $("#success").show();
+                    $("#success").fadeOut(1000);
+                  }
+                  else
+                  {
+                    $("#fail").show();
+                    $("#fail").fadeOut(1000);
+                  }     
+                }
+            });
+          });
           $("#7-1").click(function(e) {
           e.preventDefault();
                 $.ajax({
