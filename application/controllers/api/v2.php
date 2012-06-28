@@ -737,7 +737,7 @@ class V2 extends REST_Controller
 
         foreach ($offersarray as &$value) 
         {
-             unset($value['member_id']);
+             unset($value['fellow_id']);
              unset($value['created']);
              array_push($offer_ids,$value['offer_id']); 
         }
@@ -763,6 +763,37 @@ class V2 extends REST_Controller
 
         $this->response($out,200);
     }
+    //6-4:获取当前offer的关注者
+    function offerfollower_get($offer_url_token='')
+    {
+        $this->load->model('offer_model', '', TRUE);
+        $this->load->model('fellow_model', '', TRUE);
+        $this->load->model('follow_offer_model', '', TRUE);
+        if ($offer_url_token == '') $this->reponse(array('error'=>'no token'), 400);
+        $offer_id = $this->offer_model->get_entry_byoffer_url_token($offer_url_token);
+        if (!$offer_id) $this->reponse(array('error'=>'offer not exists'), 400);
+        $fellow = $this->follow_offer_model->get_fellowid_by_offer_id($offer_id);
+        if (!$fellow) $this->response(array('error'=>'offer no followers'), 400);
+    
+        $fellow_ids = array();
+        foreach($fellow as $key => $item)
+        {
+            array_push($fellow_ids, $item['fellow_id']);
+        }
+        $fellows = $this->fellow_model->get_entrys_byfellow_ids($fellow_ids);
+        foreach($fellows as $key => $value)
+        {
+            $out[$key]['created'] = $value['created'];
+            $out[$key]['location'] = $value['location']; 
+            $out[$key]['target'] = $value['target'];
+            $out[$key]['author_id'] = $value['fellow_url_token'];
+            $out[$key]['author_first_name'] = $value['first_name']; 
+            $out[$key]['author_last_name'] = $value['last_name']; 
+        }
+        $this->response($out, 200);
+    }
+
+
     //#7、Fellow与Fellow之间的关系
 
     //7-1:关注一个fellow
@@ -872,8 +903,6 @@ class V2 extends REST_Controller
 
         foreach ($be_fellowsarray as &$value) 
         {
-             unset($value['member_id']);
-             unset($value['created']);
              array_push($be_fellow_ids,$value['be_fellow_id']); 
         }
 
@@ -890,6 +919,53 @@ class V2 extends REST_Controller
 
         $this->response($out,200);
     }
-}
+    //6-4:获取关注当前fellow的fellow
+    function befollowfellow_get($be_fellow_id='')
+    {
+        $be_fellow_url_token = $be_fellow_id; 
 
+        if(empty($be_fellow_url_token))
+        {
+            $this->response(array('error' => 'no fellow id '), 400);
+        }
+
+        $this->load->model('fellow_model','',TRUE);
+        $be_fellow=$this->fellow_model->get_entry_byfellow_url_token($be_fellow_url_token);
+
+        if(empty($be_fellow))
+        {
+            $this->response(array('error'=>'no this fellow_url_token'),400);
+        }
+
+        $be_fellow_id = $be_fellow['id'];
+        
+
+
+        $this->load->model('follow_fellow_model','',TRUE);
+        $fellowsarray = $this->follow_fellow_model->get_fellowid_bybe_fellow_id($be_fellow_id);
+
+        if(empty($fellowsarray))
+        {
+             $this->response(array('error'=>'this fellow is not be followed'),400);            
+        }
+
+        $fellow_ids = array();
+
+        foreach ($fellowsarray as &$value) 
+             array_push($fellow_ids,$value['fellow_id']); 
+
+        $this->load->model('fellow_model','',TRUE);
+
+        $fellows = $this->fellow_model->get_entrys_byfellow_ids($fellow_ids);
+       
+        foreach ($fellows as $key => $value) 
+        {
+            $out[$key]['author_id'] = $value['fellow_url_token'];
+            $out[$key]['author_first_name'] = $value['first_name']; 
+            $out[$key]['author_last_name'] = $value['last_name']; 
+        }
+
+        $this->response($out,200);
+    }
+}
 

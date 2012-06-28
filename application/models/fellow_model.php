@@ -54,7 +54,7 @@ class fellow_model extends CI_Model {
 
     function get_entrys_byfellow_ids($fellow_ids)
     {
-        $this->db->select('fellow.fellow_url_token,fellow.first_name,fellow.last_name');
+        $this->db->select('*');
         $this->db->from('fellow');
         $this->db->where_in('id',$fellow_ids); 
 
