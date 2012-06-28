@@ -12,7 +12,7 @@ class Follow_offer_model extends CI_Model {
     {
         $this->db->select('*');
         $this->db->from('follow_offer');
-        $this->db->where('follow_id',$follow_id);
+        $this->db->where('fellow_id',$fellow_id);
         $query = $this->db->get();
         
         return $query->result_array();
