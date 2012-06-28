@@ -52,6 +52,16 @@ class fellow_model extends CI_Model {
         return mysql_insert_id();
     }
 
+    function get_entrys_byfellow_ids($fellow_ids)
+    {
+        $this->db->select('fellow.fellow_url_token,fellow.first_name,fellow.last_name');
+        $this->db->from('fellow');
+        $this->db->where_in('id',$fellow_ids); 
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
 }
 
 /* End of fellow_model.php */
