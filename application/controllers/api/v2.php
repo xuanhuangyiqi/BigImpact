@@ -305,7 +305,7 @@ class V2 extends REST_Controller
         $out['organization_website_url'] = $fellow['organization_website_url'];
         $out['organization_type'] = $fellow['organization_type'];
         $out['number_of_employees'] = $fellow['number_of_employees'];
-        $out['organization_estimated_annual_budget'] = $fellow['rganization_estimated_annual_budget'];
+        $out['organization_estimated_annual_budget'] = $fellow['organization_estimated_annual_budget'];
         $out['organization_phone_number_country_code'] = $fellow['organization_phone_number_country_code'];
         $out['organization_phone_number'] = $fellow['organization_phone_number'];
         $out['home_mail'] = $fellow['home_mail'];
