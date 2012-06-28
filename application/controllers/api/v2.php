@@ -285,16 +285,31 @@ class V2 extends REST_Controller
         $out['job'] = $fellow['job'];
         $out['location'] = $fellow['location'];
         $out['target'] = $fellow['target'];
-        $out['country'] = $fellow['country'];
-        $out['state'] = $fellow['state'];
-        $out['city'] = $fellow['city'];
-        $out['street'] = $fellow['street'];
-        $out['zip'] = $fellow['zip'];
+        $out['home_country'] = $fellow['home_country'];
+        $out['home_state'] = $fellow['home_state'];
+        $out['home_city'] = $fellow['home_city'];
+        $out['home_street'] = $fellow['home_street'];
+        $out['home_zip'] = $fellow['home_zip'];
+        $out['business_country'] = $fellow['business_country'];
+        $out['business_state'] = $fellow['business_state'];
+        $out['business_city'] = $fellow['business_city'];
+        $out['business_street'] = $fellow['business_street'];
+        $out['business_zip'] = $fellow['business_zip'];
+        $out['skype_id'] = $fellow['skype_id'];
         $out['mobile'] = $fellow['mobile'];
         $out['mobile_country_code'] = $fellow['mobile_country_code'];
-        $out['mail'] = $fellow['mail'];
-        $out['mail_option'] = $fellow['mail_option'];
         $out['fellow_id'] = $fellow['fellow_url_token'];
+        $out['organization_name'] = $fellow['organization_name'];
+        $out['organization_acronym'] = $fellow['organization_acronym'];
+        $out['date_organization_formed'] = $fellow['date_organization_formed'];
+        $out['organization_website_url'] = $fellow['organization_website_url'];
+        $out['organization_type'] = $fellow['organization_type'];
+        $out['number_of_employees'] = $fellow['number_of_employees'];
+        $out['organization_estimated_annual_budget'] = $fellow['rganization_estimated_annual_budget'];
+        $out['organization_phone_number_country_code'] = $fellow['organization_phone_number_country_code'];
+        $out['organization_phone_number'] = $fellow['organization_phone_number'];
+        $out['home_mail'] = $fellow['home_mail'];
+        $out['business_mail'] = $fellow['business_mail'];
         
     
         $this->response($out, 200);
@@ -318,15 +333,31 @@ class V2 extends REST_Controller
         $data['job'] = $in['job'];
         $data['location'] = $in['location'];
         $data['target'] = $in['target'];
-        $data['country'] = $in['country'];
-        $data['state'] = $in['state'];
-        $data['city'] = $in['city'];
-        $data['street'] = $in['street'];
-        $data['zip'] = $in['zip'];
+        $data['home_country'] = $in['home_country'];
+        $data['home_state'] = $in['home_state'];
+        $data['home_city'] = $in['home_city'];
+        $data['home_street'] = $in['home_street'];
+        $data['home_zip'] = $in['home_zip'];
+        $data['business_country'] = $in['business_country'];
+        $data['business_state'] = $in['business_state'];
+        $data['business_city'] = $in['business_city'];
+        $data['business_street'] = $in['business_street'];
+        $data['business_zip'] = $in['business_zip'];
+        $data['skype_id'] = $in['skype_id'];
         $data['mobile'] = $in['mobile'];
         $data['mobile_country_code'] = $in['mobile_country_code'];
-        $data['mail'] = $in['mail'];
-        $data['mail_option'] = $in['mail_option'];
+        $data['organization_name'] = $in['organization_name'];
+        $data['organization_acronym'] = $in['organization_acronym'];
+        $data['date_organization_formed'] = $in['date_organization_formed'];
+        $data['organization_website_url'] = $in['organization_website_url'];
+        $data['organization_type'] = $in['organization_type'];
+        $data['number_of_employees'] = $in['number_of_employees'];
+        $data['organization_estimated_annual_budget'] = $in['organization_estimated_annual_budget'];
+        $data['organization_phone_number_country_code'] = $in['organization_phone_number_country_code'];
+        $data['organization_phone_number'] = $in['organization_phone_number'];
+        $data['home_mail'] = $in['home_mail'];
+        $data['business_mail'] = $in['business_mail'];
+    
 
         $updatestatus = $this->fellow_model->update_entry($fellow_url_token, $data);
         if ($updatestatus == 1)

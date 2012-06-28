@@ -193,7 +193,7 @@
                 $.ajax({
                 url : 'api/v2/fellow',
                 type : 'PUT',
-                data　: {json: '{"first_name": "John","last_name": "Smith","mail_option": 1,"mail": "xueyuan road","mobile_country_code":"010","mobile":"82318321","country":"China","zip":"100191","state":"Beijing","city":"Beijing","street":"Xueyuan Road","target":"Education","location":"haidian","job":"IT","language":"Chinese","gender":1'},
+                data　: {json: '{"first_name": "John","last_name": "Smith","mobile_country_code":"010","mobile":"82318321","home_country":"China","home_zip":"100191","home_state":"Beijing","home_city":"Beijing","home_street":"Xueyuan Road","business_country":"China","business_zip":"100191","business_state":"Beijing","business_city":"Beijing","business_street":"Xueyuan Road","target":"Education","location":"haidian","job":"IT","home_mail":"home...mail","business_mail":"business mail...","skype_id":"wo@skype.com","language":"Chinese","gender":1,"organization_name":"omar","organization_acronym":"???","date_organization_formed":"...","organization_website_url":"....","organization_type":"gongyi","number_of_employees":"340","organization_estimated_annual_budget":"...","organization_phone_number_country_code":"100","organization_phone_number":"211"}'},
                 complete:function(x,t){   
                   if(x.status==200)
                   {
