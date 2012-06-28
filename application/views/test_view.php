@@ -127,6 +127,9 @@
           <div class="span2">
             <a class="btn" id="7-2"><span class="label">to wxy:do</span>取消关注一个Fellow</a>
           </div> 
+          <div class="span2">
+            <a class="btn" id="7-3"><span class="label">to wxy:do</span>查看关注的Fellow</a>
+          </div> 
         </div>
       </div>
 
