@@ -394,7 +394,7 @@
           $("#7-2").click(function(e) {
           e.preventDefault();
                 $.ajax({
-                url : 'api/v2/followfellow/100001',
+                url : 'api/v2/followfellow/100002',
                 type : 'DELETE',
                 data　: {},
                 complete:function(x,t){
