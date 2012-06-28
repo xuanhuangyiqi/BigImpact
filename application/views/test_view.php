@@ -108,7 +108,10 @@
           </div>
           <div class="span2">
             <a class="btn" id="6-2"><span class="label label-success">完</span>取消关注一个offer</a>
-          </div>      
+          </div>
+          <div class="span2">
+            <a class="btn" id="6-3"><span class="label">doing</span>获取当前fellow关注的offer</a>
+          </div>               
         </div>
       </div>
 
@@ -123,7 +126,7 @@
           </div>
           <div class="span2">
             <a class="btn" id="7-2"><span class="label">do</span>取消关注一个Fellow</a>
-          </div>      
+          </div> 
         </div>
       </div>
 
