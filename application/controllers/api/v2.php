@@ -786,9 +786,9 @@ class V2 extends REST_Controller
             $out[$key]['created'] = $value['created'];
             $out[$key]['location'] = $value['location']; 
             $out[$key]['target'] = $value['target'];
-            $out[$key]['author_id'] = $value['fellow_url_token'];
-            $out[$key]['author_first_name'] = $value['first_name']; 
-            $out[$key]['author_last_name'] = $value['last_name']; 
+            $out[$key]['fellow_id'] = $value['fellow_url_token'];
+            $out[$key]['first_name'] = $value['first_name']; 
+            $out[$key]['last_name'] = $value['last_name']; 
         }
         $this->response($out, 200);
     }
@@ -833,7 +833,7 @@ class V2 extends REST_Controller
 
     }
     
-    //6-2:取消关注一个fellow
+    //7-2:取消关注一个fellow
     function followfellow_delete($be_fellow_id='')
     {
         $fellow_url_token = $this->_auth_fellow(); 
@@ -869,7 +869,7 @@ class V2 extends REST_Controller
 
     }
 
-    //6-3:获取当前fellow关注的fellow
+    //7-3:获取当前fellow关注的fellow
     function followfellow_get($fellow_id='')
     {
         $fellow_url_token = $fellow_id; 
@@ -912,14 +912,14 @@ class V2 extends REST_Controller
        
         foreach ($be_fellows as $key => $value) 
         {
-            $out[$key]['author_id'] = $value['fellow_url_token'];
-            $out[$key]['author_first_name'] = $value['first_name']; 
-            $out[$key]['author_last_name'] = $value['last_name']; 
+            $out[$key]['fellow_id'] = $value['fellow_url_token'];
+            $out[$key]['first_name'] = $value['first_name']; 
+            $out[$key]['last_name'] = $value['last_name']; 
         }
 
         $this->response($out,200);
     }
-    //6-4:获取关注当前fellow的fellow
+    //7-4:获取关注当前fellow的fellow
     function befollowfellow_get($be_fellow_id='')
     {
         $be_fellow_url_token = $be_fellow_id; 
@@ -960,9 +960,9 @@ class V2 extends REST_Controller
        
         foreach ($fellows as $key => $value) 
         {
-            $out[$key]['author_id'] = $value['fellow_url_token'];
-            $out[$key]['author_first_name'] = $value['first_name']; 
-            $out[$key]['author_last_name'] = $value['last_name']; 
+            $out[$key]['fellow_id'] = $value['fellow_url_token'];
+            $out[$key]['first_name'] = $value['first_name']; 
+            $out[$key]['last_name'] = $value['last_name']; 
         }
 
         $this->response($out,200);

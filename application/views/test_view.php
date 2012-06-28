@@ -116,7 +116,7 @@
             <a class="btn" id="6-3"><span class="label label-success">完</span>获取当前fellow关注的offer</a>
           </div> 
           <div class="span2">
-            <a class="btn" id="6-4"><span class="label">do</span>获取指定offer都有哪些fellow follow了</a>
+            <a class="btn" id="6-4"><span class="label label-success">完</span>获取指定offer都有哪些fellow follow了</a>
           </div>               
         </div>
       </div>
@@ -137,7 +137,7 @@
             <a class="btn" id="7-3"><span class="label label-success">完</span>查看关注的Fellow</a>
           </div> 
           <div class="span2">
-            <a class="btn" id="7-4"><span class="label">do</span>查看关注了我的Fellow</a>
+            <a class="btn" id="7-4"><span class="label label-success">完</span>查看关注了我的Fellow</a>
           </div> 
         </div>
       </div>
