@@ -550,15 +550,15 @@ class V1 extends REST_Controller
 
         }
     }
-
-    function offer_get()//$member_id(member_token)='',$time_stamp='now',$num='10',$orderby='created',$offer_id(offer_token)=''
+    
+    function offer_get($offer_token='')//$member_id(member_token)='',$time_stamp='now',$num='10',$orderby='created',$offer_id(offer_token)=''
     {
-          $this->load->model('member_model','',TRUE);
-        $json = $this->get('json');
-        $arr = json_decode($json,TRUE);
+        $this->load->model('member_model','',TRUE);
+       // $json = $this->get('json');
+       // $arr = json_decode($json,TRUE);
 
         //$this->response($arr,200);
-        $offer_token = $arr['offer_id'];
+        $offer_token = $offer_token;
 
         $this->load->model('offer_model','',TRUE);
 
@@ -566,12 +566,16 @@ class V1 extends REST_Controller
         {
             //$offer_token=$this->session->userdata('id');
             $offer_detail=$this->offer_model->get_entry_bytoken($offer_token);
+
      
             if(!empty($offer_detail))
             {      
                 $token_arr = $this->member_model->ids2tokens(array($offer_detail['member_id']));
                 //$this->response($token_arr,200);
-                $offer_detail['member_id'] = $token_arr[$offer_detail['member_id']];
+                $offer_detail['member_id'] = $token_arr[$offer_detail['member_id']]['url_token'];
+                $offer_detail['member_first_name'] = $token_arr[$offer_detail['member_id']]['first_name'];
+                $offer_detail['member_last_name'] = $token_arr[$offer_detail['member_id']]['last_name'];
+                unset($offer_detail['id']);
                 $this->response($offer_detail,200);
             }
             else
@@ -579,10 +583,10 @@ class V1 extends REST_Controller
         }
             
             
-        $number=$arr['num'];
-        $time_stamp=$arr['time_stamp'];
-        $orderby=$arr['orderby'];
-        $member_token=$arr['member_id'];
+        $number=$this->get('num');
+        $time_stamp=$this->get('time_stamp');
+        $orderby=$this->get('orderby');
+        $member_token=$this->get('member_id');
 
         if(empty($number))
             $number=15;
@@ -618,14 +622,18 @@ class V1 extends REST_Controller
             
             $aarr = array();
             foreach ($offer as $x)
+            {
                 array_push($aarr, $x['member_id']);
+            }
          
             $ids2tokens = $this->member_model->ids2tokens($aarr);
-           // $this->response($ids2tokens,200);
+           //$this->response($ids2tokens,200);
             foreach ($offer as &$x)
             {
 
-                $x['member_id'] = $ids2tokens[($x['member_id'])];
+                $x['member_id'] = $ids2tokens[($x['member_id'])]['url_token'];
+                $x['member_first_name'] = $ids2tokens[($x['member_id'])]['first_name'];
+                $x['member_last_name'] = $ids2tokens[($x['member_id'])]['last_name'];
                 //$this->response($ids2tokens,200);
                 unset($x['id']);
             }
@@ -634,11 +642,11 @@ class V1 extends REST_Controller
         }
         else
         {
-            offer = array()
-            $this->response(offer, 200);
+            $offer = array();
+            $this->response($offer, 200);
         }   
     }
-
+    
 
     function member_follow_offer_get()
     {
@@ -733,6 +741,142 @@ class V1 extends REST_Controller
 
         }
     }
+    
+    function offer_delete($url_token)
+    {
+
+         $userdata=$this->session->userdata('userdata');
+
+        if(empty($userdata))
+        {
+            $this->response(array('error' => 'not login'), 403);
+        }
+        else
+        {
+            if($userdata['auth']==1)
+            {
+                if(empty($url_token))
+                {
+                    $this->response(array('error' => 'no offer id '), 400);
+                }
+                else
+                {
+                    $this->load->model('member_model','',TRUE);
+                    $member = $this->member_model->get_entry_bytoken($userdata['url_token']);
+                    $member_id_1 = $member['id'];
+
+                    $this->load->model('offer_model','',TRUE);
+                    $offer=$this->offer_model->get_entry_bytoken($url_token);
+                    $member_id_2 = $offer['member_id'];
+                    if($member_id_1==$member_id_2)
+                    {
+                        $this->offer_model->delete_entry_bytoken($url_token);
+                        $this->response(array('error' => ''), 200);
+                    }
+                    else
+                    {
+                        $this->response(array('error' => 'you are not the author of the offer'), 400);
+                    }
+                }
+            }
+       
+            else
+            {
+                $this->response(array('error' => 'you are not a member'), 403);
+            }
+
+        }
+    }
+    /*
+    function offer_get($offer_token = '')//$member_id(member_token)='',$time_stamp='now',$num='10',$orderby='created',$offer_id(offer_token)=''
+    {
+          $this->load->model('member_model','',TRUE);
+        //$json = $this->get('json');
+        //$arr = json_decode($json,TRUE);
+
+        //$this->response($arr,200);
+        $offer_token = $offer_token;
+
+        $this->load->model('offer_model','',TRUE);
+
+        if(!empty($offer_token))
+        {
+            //$offer_token=$this->session->userdata('id');
+            $offer_detail=$this->offer_model->get_entry_bytoken($offer_token);
+     
+            if(!empty($offer_detail))
+            {      
+                $token_arr = $this->member_model->ids2tokens(array($offer_detail['member_id']));
+                //$this->response($token_arr,200);
+                $offer_detail['member_id'] = $token_arr[$offer_detail['member_id']];
+                $this->response($offer_detail,200);
+            }
+            else
+                $this->response('no such offer',400);
+        }
+            
+            
+        $number=$this->get('num');
+        $time_stamp=$this->get('time_stamp');
+        $orderby=$this->get('orderby');
+        $member_token=$this->get('member_id');
+
+        if(empty($number))
+            $number=15;
+
+        if(empty($time_stamp))
+        {
+            $time_stamp=time();
+        }
+        
+        if(empty($orderby))
+            $orderby='created';
+
+        
+        if(!empty($member_token))
+        {
+          
+            $temp=$this->member_model->get_entry_bytoken($member_token);
+            if(!empty($temp))
+                $member_id=$temp['id'];
+            else
+                $this->response('wrong user id',400);
+        }
+        else
+        {
+            $member_id=$member_token;
+        }
+        
+        $offer = $this->offer_model->get_data_bytoken($member_id,$time_stamp,$number,$orderby);
+
+        if(!empty($offer))
+        {
+            //unset($offer['id']);
+            
+            $aarr = array();
+            foreach ($offer as $x)
+                array_push($aarr, $x['member_id']);
+         
+            $ids2tokens = $this->member_model->ids2tokens($aarr);
+           // $this->response($ids2tokens,200);
+            foreach ($offer as &$x)
+            {
+
+                $x['member_id'] = $ids2tokens[($x['member_id'])];
+                //$this->response($ids2tokens,200);
+                unset($x['id']);
+            }
+            $this->response($offer,200);
+            
+        }
+        else
+        {
+            $offer = array();
+            $this->response($offer, 200);
+        }   
+    }
+    */
+
 
     
 }

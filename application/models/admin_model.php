@@ -12,29 +12,18 @@ class Admin_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('admin');
         $this->db->where('email',$email);
-        $this->db->where('passwd',$password);
+        $this->db->where('password',$password);
 
         $query = $this->db->get();
 
         return $query->row_array();
     }
-
+    
     function get_entry_byemail($email)
     {
         $this->db->select('*');
         $this->db->from('admin');
         $this->db->where('email',$email);
-
-        $query = $this->db->get();
-
-        return $query->row_array();
-    }
-
-    function get_entry_byid($id)
-    {
-        $this->db->select('*');
-        $this->db->from('admin');
-        $this->db->where('id',$id);
 
         $query = $this->db->get();
 
@@ -48,5 +37,5 @@ class Admin_model extends CI_Model {
     }
 }
 
-/* End of user_model.php */
-/* Location: ./system/application/controllers/user_model.php */
+/* End of admin_model.php */
+/* Location: ./system/application/model/admin_model.php */
