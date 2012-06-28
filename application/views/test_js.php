@@ -213,7 +213,7 @@
                 $.ajax({
                 url : 'api/v2/fellow_password',
                 type : 'POST',
-                data　: {json: '{"email":"100524333@qq.com"}'},
+                data　: {json: '{"email":"huiter.me@gmail.com"}'},
                 complete:function(x,t){   
                   if(x.status==200)
                   {
