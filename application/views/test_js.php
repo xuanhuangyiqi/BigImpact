@@ -208,6 +208,26 @@
                 }
             });
           });
+        $("#4-4").click(function(e) {
+          e.preventDefault();
+                $.ajax({
+                url : 'api/v2/fellow_password',
+                type : 'POST',
+                data　: {json: '{"email":"100524333@qq.com"}'},
+                complete:function(x,t){   
+                  if(x.status==200)
+                  {
+                    $("#success").show();
+                    $("#success").fadeOut(1000);
+                  }
+                  else
+                  {
+                    $("#fail").show();
+                    $("#fail").fadeOut(1000);
+                  } 
+                }
+            });
+          });
 
 
         $("#5-1").click(function(e) {

@@ -69,7 +69,10 @@
           </div>  
           <div class="span2">
             <a class="btn" id="4-3"><span class="label label-success">完</span>修改当前登陆的Fellow信息</a>
-          </div>  
+          </div> 
+          <div class="span2">
+            <a class="btn" id="4-4"><span class="label">doing</span>重置指定fellow的密码</a>
+          </div>   
         </div>
       </div>
 
