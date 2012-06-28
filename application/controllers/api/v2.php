@@ -709,6 +709,133 @@ class V2 extends REST_Controller
 
         $this->response($out,200);
     }
+    //#7、Fellow与Fellow之间的关系
+
+    //7-1:关注一个fellow
+    
+    function followfellow_post($be_fellow_id='')
+    {   
+        
+        $fellow_url_token = $this->_auth_fellow(); 
+        $be_fellow_url_token = $be_fellow_id;
+            
+        $this->load->model('fellow_model', '', TRUE);   
+        $fellow = $this->fellow_model->get_entry_byfellow_url_token($fellow_url_token);
+    
+        $this->load->model('fellow_model', '', TRUE);   
+        $be_fellow = $this->fellow_model->get_entry_byfellow_url_token($be_fellow_url_token);
+
+        if ($fellow == $be_fellow)
+            $this->response(array('error'=> 'follow self'), 200);
+        
+        if(empty($be_fellow))
+        {
+            $this->response(array('error' => 'no such member or no such be_fellow'), 400);
+        }
+        
+        $fellow_id = $fellow['id'];
+        $be_fellow_id = $be_fellow['id'];
+
+        $data['fellow_id'] = $fellow_id;
+        $data['be_fellow_id'] = $be_fellow_id;
+        $data['created'] = time();
+
+        $this->load->model('follow_fellow_model','',TRUE);
+
+        $this->follow_fellow_model->insert_entry($data);
+
+        $this->response(array('error'=>'insert success'), 200);
+
+    }
+    
+    //6-2:取消关注一个fellow
+    function followfellow_delete($be_fellow_id='')
+    {
+        $fellow_url_token = $this->_auth_fellow(); 
+        $be_fellow_url_token = $be_fellow_id;
+ 
+        $this->load->model('fellow_model', '', TRUE);   
+        $fellow = $this->fellow_model->get_entry_byfellow_url_token($fellow_url_token);
+    
+        $this->load->model('fellow_model', '', TRUE);   
+        $be_fellow = $this->fellow_model->get_entry_byfellow_url_token($be_fellow_url_token);
+        
+        if(empty($be_fellow))
+        {
+            $this->response(array('error' => 'no such member or no such be_fellow'), 400);
+        }
+        
+        $fellow_id = $fellow['id'];
+        $be_fellow_id = $be_fellow['id'];
+
+
+        $this->load->model('follow_fellow_model','',TRUE);
+
+        $res = $this->follow_fellow_model->delete_entry($fellow_id,$be_fellow_id);
+
+        if ($res == 1)
+        {
+            $this->response(array('error' =>'delete success'), 200);
+        }
+        else
+        {
+            $this->response(array('error' => 'delete error'), 400);
+        }
+
+    }
+
+    //6-3:获取当前fellow关注的fellow
+    function followfellow_get($fellow_id='')
+    {
+        $fellow_url_token = $fellow_id; 
+
+        if(empty($fellow_url_token))
+        {
+            $this->response(array('error' => 'no fellow id '), 400);
+        }
+
+        $this->load->model('fellow_model','',TRUE);
+        $fellow=$this->fellow_model->get_entry_byfellow_url_token($fellow_url_token);
+
+        if(empty($fellow))
+        {
+            $this->response(array('error'=>'no this fellow_url_token'),400);
+        }
+
+        $fellow_id = $fellow['id'];
+        
+
+
+        $this->load->model('follow_fellow_model','',TRUE);
+        $be_fellowsarray = $this->follow_fellow_model->get_be_fellowid_byfellow_id($fellow_id);
+
+        if(empty($be_fellowsarray))
+        {
+             $this->response(array('error'=>'this fellow does not follow any be_fellow'),400);            
+        }
+
+        $be_fellow_ids = array();
+
+        foreach ($be_fellowsarray as &$value) 
+        {
+             unset($value['member_id']);
+             unset($value['created']);
+             array_push($be_fellow_ids,$value['be_fellow_id']); 
+        }
+
+        $this->load->model('fellow_model','',TRUE);
+
+        $be_fellows = $this->fellow_model->get_entrys_byfellow_ids($be_fellow_ids);
+       
+        foreach ($be_fellows as $key => $value) 
+        {
+            $out[$key]['author_id'] = $value['fellow_url_token'];
+            $out[$key]['author_first_name'] = $value['first_name']; 
+            $out[$key]['author_last_name'] = $value['last_name']; 
+        }
+
+        $this->response($out,200);
+    }
 }
 
 

@@ -371,5 +371,67 @@
                 }
             });
           });
+          $("#7-1").click(function(e) {
+          e.preventDefault();
+                $.ajax({
+                url : 'api/v2/followfellow/100002',
+                type : 'POST',
+                data　: {},
+                complete:function(x,t){
+                  if(x.status==200)
+                  {
+                    $("#success").show();
+                    $("#success").fadeOut(1000);
+                  }
+                  else
+                  {
+                    $("#fail").show();
+                    $("#fail").fadeOut(1000);
+                  }     
+                }
+            });
+          });
+          $("#7-2").click(function(e) {
+          e.preventDefault();
+                $.ajax({
+                url : 'api/v2/followfellow/100001',
+                type : 'DELETE',
+                data　: {},
+                complete:function(x,t){
+                  if(x.status==200)
+                  {
+                    $("#success").show();
+                    $("#success").fadeOut(1000);
+                  }
+                  else
+                  {
+                    $("#fail").show();
+                    $("#fail").fadeOut(1000);
+                  }     
+                }
+            });
+          });
+          $("#7-3").click(function(e) {
+          e.preventDefault();
+                $.ajax({
+                url : 'api/v2/followfellow/100001',
+                type : 'GET',
+                data　: {},
+                complete:function(x,t){
+                  if(x.status==200)
+                  {
+                    $("#success").show();
+                    $("#success").fadeOut(1000);
+                  }
+                  else
+                  {
+                    $("#fail").show();
+                    $("#fail").fadeOut(1000);
+                  }     
+                }
+            });
+          });
+
+
 });
 </script>
