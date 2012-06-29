@@ -813,7 +813,7 @@ class V2 extends REST_Controller
         if ($offer_url_token == '') $this->reponse(array('error'=>'no token'), 400);
         $offer_id = $this->offer_model->get_entry_byoffer_url_token($offer_url_token);
         if (!$offer_id) $this->reponse(array('error'=>'offer not exists'), 400);
-        $fellow = $this->follow_offer_model->get_fellowid_by_offer_id($offer_id);
+        $fellow = $this->follow_offer_model->get_fellowid_by_offer_id($offer_id['id']);
         if (!$fellow) $this->response(array('error'=>'offer no followers'), 400);
     
         $fellow_ids = array();

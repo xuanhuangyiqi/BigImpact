@@ -458,7 +458,7 @@ class Reset_model extends CI_Model {
          $this->db->insert('offer', $data); 
         $data = array(
                'offer_url_token'=>'40801',
-               'created'=>'13406743506',
+               'created'=>'1340674350',
                'fellow_id'=>'1',
                'title'=>'Kill the cancer',
                'description'=>'We offer the money to help the people in despair',

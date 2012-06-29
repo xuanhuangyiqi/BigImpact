@@ -414,7 +414,7 @@
           $("#6-4").click(function(e) {
           e.preventDefault();
                 $.ajax({
-                url : 'api/v2/offerfollower/40799',
+                url : 'api/v2/offerfollower/40802',
                 type : 'GET',
                 data　: {},
                 complete:function(x,t){
