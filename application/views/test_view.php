@@ -73,6 +73,9 @@
           <div class="span2">
             <a class="btn" id="4-4"><span class="label">doing</span>重置指定fellow的密码</a>
           </div>   
+          <div class="span2">
+            <a class="btn" id="4-5"><span class="label">doing</span>重置当前登陆fellow的密码</a>
+          </div>   
         </div>
       </div>
 
