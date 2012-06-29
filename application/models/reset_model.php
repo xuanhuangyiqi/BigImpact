@@ -113,8 +113,8 @@ class Reset_model extends CI_Model {
 
                 $data = array(
                 'created' => '0000000003',
-                'email' => '100524333@qq.com' ,
-                'password' => 'huiter',
+                'email' => 'liuyuxiao123@gmail.com' ,
+                'password' => 'liuyuxiao',
                 'first_name' => 'chen',
                 'last_name' => 'qi',
                 'mobile_country_code' => '010',
@@ -154,7 +154,7 @@ class Reset_model extends CI_Model {
         $data = array(
                 'created' => '0000000005',
                 'email' => 'xuanhuangyiqi@126.com' ,
-                'password' => '123456',
+                'password' => 'wangxiaoyu',
                 'first_name' => 'omarhub',
                 'last_name' => 'fellow',
                 'mobile_country_code' => '010',
@@ -192,10 +192,10 @@ class Reset_model extends CI_Model {
         $this->db->insert('fellow', $data); 
         $data = array(
                 'created' => '0000000006',
-                'email' => 'htedsv@omar.com' ,
-                'password' => '123456',
-                'first_name' => 'omarhub',
-                'last_name' => 'fellow',
+                'email' => 'jxaa144081@163.com' ,
+                'password' => 'huxiangquan',
+                'first_name' => 'hu',
+                'last_name' => 'xiangquan',
                 'mobile_country_code' => '010',
                 'mobile' => 'China Unicom',
                 'home_country' => 'China',
@@ -231,10 +231,10 @@ class Reset_model extends CI_Model {
         $this->db->insert('fellow', $data); 
         $data = array(
                 'created' => '0000000007',
-                'email' => 'luin@gmail.com' ,
-                'password' => '123456',
-                'first_name' => 'omarhub',
-                'last_name' => 'fellow',
+                'email' => '674400921@qq.com' ,
+                'password' => 'zhangweishu',
+                'first_name' => 'zhang',
+                'last_name' => 'weishu',
                 'mobile_country_code' => '010',
                 'mobile' => 'China Unicom',
                 'home_country' => 'China',
@@ -270,10 +270,10 @@ class Reset_model extends CI_Model {
 
         $data = array(
                 'created' => '0000000008',
-                'email' => 'i@zihua.li' ,
-                'password' => '123456',
-                'first_name' => 'omarhub',
-                'last_name' => 'fellow',
+                'email' => 'labikyo@gmail.com' ,
+                'password' => 'lixinyue',
+                'first_name' => 'li',
+                'last_name' => 'xinyue',
                 'mobile_country_code' => '010',
                 'mobile' => 'China Unicom',
                 'home_country' => 'China',
@@ -305,9 +305,124 @@ class Reset_model extends CI_Model {
                 'organization_phone_number_country_code' => '',
                 'organization_phone_number' => ''
             );
-
         $this->db->insert('fellow', $data); 
 
+        $data = array(
+                'created' => '0000000009',
+                'email' => 'buaawangyue@gmail.com' ,
+                'password' => 'wangyue',
+                'first_name' => 'wang',
+                'last_name' => 'yue',
+                'mobile_country_code' => '010',
+                'mobile' => 'China Unicom',
+                'home_country' => 'China',
+                'home_zip' => '100191',
+                'home_state' => 'haidian',
+                'home_city' => 'Beijing',
+                'home_street' => 'Xueyuan Road',
+                'business_country' => 'China',
+                'business_zip' => '100191',
+                'business_state' => '西城',
+                'business_city' => 'Beijing',
+                'business_street' => 'Tianan Road',
+                'target' => 'Education',
+                'location' => 'Buaa',
+                'job' => 'IT',
+                'language' => 'Chinese',
+                'gender' => '1',
+                'fellow_url_token'  =>  '100008',
+                'skype_id' => 'i@skype.com',
+                'home_mail' => 'home...mail',
+                'business_mail' =>'business_mail',
+                'organization_name' => '130',
+                'organization_acronym' => '',
+                'date_organization_formed' => '19900101',
+                'organization_website_url' => '130.huiter.me',
+                'organization_type' => '',
+                'number_of_employees' => '130',
+                'organization_estimated_annual_budget' => '',
+                'organization_phone_number_country_code' => '',
+                'organization_phone_number' => ''
+            );
+        $this->db->insert('fellow', $data); 
+
+        $data = array(
+                'created' => '0000000019',
+                'email' => 'randy228@126.com' ,
+                'password' => 'wangchao',
+                'first_name' => 'wang',
+                'last_name' => 'chao',
+                'mobile_country_code' => '010',
+                'mobile' => 'China Unicom',
+                'home_country' => 'China',
+                'home_zip' => '100191',
+                'home_state' => 'haidian',
+                'home_city' => 'Beijing',
+                'home_street' => 'Xueyuan Road',
+                'business_country' => 'China',
+                'business_zip' => '100191',
+                'business_state' => '西城',
+                'business_city' => 'Beijing',
+                'business_street' => 'Tianan Road',
+                'target' => 'Education',
+                'location' => 'Buaa',
+                'job' => 'IT',
+                'language' => 'Chinese',
+                'gender' => '1',
+                'fellow_url_token'  =>  '100009',
+                'skype_id' => 'i@skype.com',
+                'home_mail' => 'home...mail',
+                'business_mail' =>'business_mail',
+                'organization_name' => '130',
+                'organization_acronym' => '',
+                'date_organization_formed' => '19900101',
+                'organization_website_url' => '130.huiter.me',
+                'organization_type' => '',
+                'number_of_employees' => '130',
+                'organization_estimated_annual_budget' => '',
+                'organization_phone_number_country_code' => '',
+                'organization_phone_number' => ''
+            );
+        $this->db->insert('fellow', $data); 
+
+        $data = array(
+                'created' => '0000000009',
+                'email' => 'shiyin92@gmail.com' ,
+                'password' => 'wangshiyin',
+                'first_name' => 'wang',
+                'last_name' => 'shiyin',
+                'mobile_country_code' => '010',
+                'mobile' => 'China Unicom',
+                'home_country' => 'China',
+                'home_zip' => '100191',
+                'home_state' => 'haidian',
+                'home_city' => 'Beijing',
+                'home_street' => 'Xueyuan Road',
+                'business_country' => 'China',
+                'business_zip' => '100191',
+                'business_state' => '西城',
+                'business_city' => 'Beijing',
+                'business_street' => 'Tianan Road',
+                'target' => 'Education',
+                'location' => 'Buaa',
+                'job' => 'IT',
+                'language' => 'Chinese',
+                'gender' => '1',
+                'fellow_url_token'  =>  '100010',
+                'skype_id' => 'i@skype.com',
+                'home_mail' => 'home...mail',
+                'business_mail' =>'business_mail',
+                'organization_name' => '130',
+                'organization_acronym' => '',
+                'date_organization_formed' => '19900101',
+                'organization_website_url' => '130.huiter.me',
+                'organization_type' => '',
+                'number_of_employees' => '130',
+                'organization_estimated_annual_budget' => '',
+                'organization_phone_number_country_code' => '',
+                'organization_phone_number' => ''
+            );
+        $this->db->insert('fellow', $data); 
         $data = array(
                'offer_url_token'=>'40798',
                'created'=>'1340673285',
@@ -364,33 +479,16 @@ class Reset_model extends CI_Model {
             );     
          $this->db->insert('offer', $data); 
 
-         $data = array(
-            'fellow_id'=> '1',
-            'be_fellow_id'=> '3',
-            'created'=> '1340675344',
-            );
-         $this->db->insert('follow_fellow', $data); 
-         $data = array(
-            'fellow_id'=> '2',
-            'be_fellow_id'=> '3',
-            'created'=> '1340675344',
-            );
-         $this->db->insert('follow_fellow', $data); 
-         $data = array(
-            'fellow_id'=> '1',
-            'be_fellow_id'=> '6',
-            'created'=> '1340675344',
-            );
-         $this->db->insert('follow_fellow', $data); 
-         $data = array(
-            'fellow_id'=> '4',
-            'be_fellow_id'=> '2',
-            'created'=> '1340675344',
-            );
-         $this->db->insert('follow_fellow', $data); 
+
          $data = array(
             'fellow_id'=> '1',
             'be_fellow_id'=> '2',
+            'created'=> '1340675344',
+            );
+         $this->db->insert('follow_fellow', $data); 
+         $data = array(
+            'fellow_id'=> '1',
+            'be_fellow_id'=> '3',
             'created'=> '1340675344',
             );
          $this->db->insert('follow_fellow', $data); 
@@ -402,12 +500,72 @@ class Reset_model extends CI_Model {
          $this->db->insert('follow_fellow', $data); 
          $data = array(
             'fellow_id'=> '1',
+            'be_fellow_id'=> '6',
+            'created'=> '1340675344',
+            );
+         $this->db->insert('follow_fellow', $data); 
+         $data = array(
+            'fellow_id'=> '1',
             'be_fellow_id'=> '7',
             'created'=> '1340675344',
             );
          $this->db->insert('follow_fellow', $data); 
          $data = array(
-            'fellow_id'=> '5',
+            'fellow_id'=> '2',
+            'be_fellow_id'=> '3',
+            'created'=> '1340675344',
+            );
+         $this->db->insert('follow_fellow', $data); 
+         $data = array(
+            'fellow_id'=> '2',
+            'be_fellow_id'=> '1',
+            'created'=> '1340675344',
+            );
+         $this->db->insert('follow_fellow', $data); 
+         $data = array(
+            'fellow_id'=> '2',
+            'be_fellow_id'=> '5',
+            'created'=> '1340675344',
+            );
+         $this->db->insert('follow_fellow', $data); 
+         $data = array(
+            'fellow_id'=> '2',
+            'be_fellow_id'=> '8',
+            'created'=> '1340675344',
+            );
+         $this->db->insert('follow_fellow', $data); 
+         $data = array(
+            'fellow_id'=> '3',
+            'be_fellow_id'=> '1',
+            'created'=> '1340675344',
+            );
+         $this->db->insert('follow_fellow', $data); 
+         $data = array(
+            'fellow_id'=> '3',
+            'be_fellow_id'=> '2',
+            'created'=> '1340675344',
+            );
+         $this->db->insert('follow_fellow', $data); 
+         $data = array(
+            'fellow_id'=> '3',
+            'be_fellow_id'=> '4',
+            'created'=> '1340675344',
+            );
+         $this->db->insert('follow_fellow', $data); 
+         $data = array(
+            'fellow_id'=> '4',
+            'be_fellow_id'=> '2',
+            'created'=> '1340675344',
+            );
+         $this->db->insert('follow_fellow', $data); 
+         $data = array(
+            'fellow_id'=> '4',
+            'be_fellow_id'=> '3',
+            'created'=> '1340675344',
+            );
+         $this->db->insert('follow_fellow', $data); 
+         $data = array(
+            'fellow_id'=> '3',
             'be_fellow_id'=> '2',
             'created'=> '1340675344',
             );
@@ -417,13 +575,13 @@ class Reset_model extends CI_Model {
 
          $data = array(
             'fellow_id'=> '1',
-            'offer_id'=> '2',
+            'offer_id'=> '3',
             'created'=> '1340675344',
             );
          $this->db->insert('follow_offer', $data); 
          $data = array(
-            'fellow_id'=> '3',
-            'offer_id'=> '6',
+            'fellow_id'=> '2',
+            'offer_id'=> '3',
             'created'=> '1340675344',
             );
          $this->db->insert('follow_offer', $data); 
@@ -447,7 +605,7 @@ class Reset_model extends CI_Model {
          $this->db->insert('follow_offer', $data); 
          $data = array(
             'fellow_id'=> '1',
-            'offer_id'=> '3',
+            'offer_id'=> '4',
             'created'=> '1340675344',
             );
          $this->db->insert('follow_offer', $data); 
