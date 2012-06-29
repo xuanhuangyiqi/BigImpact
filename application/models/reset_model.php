@@ -564,12 +564,6 @@ class Reset_model extends CI_Model {
             'created'=> '1340675344',
             );
          $this->db->insert('follow_fellow', $data); 
-         $data = array(
-            'fellow_id'=> '3',
-            'be_fellow_id'=> '2',
-            'created'=> '1340675344',
-            );
-         $this->db->insert('follow_fellow', $data); 
 
 
 
