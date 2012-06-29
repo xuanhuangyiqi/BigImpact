@@ -28,6 +28,17 @@ class Follow_offer_model extends CI_Model {
         return $query->result_array();
     }
 
+    function get_fellow_url_token_by_offer_id($offer_id)
+    {
+        $this->db->select('fellow.fellow_url_token as fellow_id');
+        $this->db->from('follow_offer');
+        $this->db->join('fellow','follow_offer.fellow_id = fellow.id');
+        $this->db->where_in('offer_id', $offer_id);
+        $query = $this->db->get();
+        
+        return $query->result_array();
+    }
+
     function insert_entry($follow_offer_data)
     { 
         $insert_query = $this->db->insert_string('follow_offer',$follow_offer_data);
