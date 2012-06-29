@@ -556,6 +556,7 @@ class V2 extends REST_Controller
             $orderby='created';
         }
 
+
         $this->load->model('offer_model','',TRUE);
         $offers = $this->offer_model->get_entrys_bynothing($number,$time_stamp,$orderby);
         /*
@@ -568,6 +569,17 @@ class V2 extends REST_Controller
             unset($x['offer_url_token']);
         }
         */
+      
+
+        $this->load->model('follow_offer_model','',TRUE);
+        $this->load->model('fellow_model','',TRUE);
+
+        foreach($offers as &$x)
+        {
+            $offer_id = $x['id']; 
+            $x['fellows'] = $this->follow_offer_model->get_fellow_url_token_by_offer_id($offer_id);
+        }
+
         foreach ($offers as $key => $value) 
         {
             $out[$key]['offer_id'] = $value['offer_url_token']; 
@@ -580,6 +592,7 @@ class V2 extends REST_Controller
             $out[$key]['author_id'] = $value['fellow_url_token'];
             $out[$key]['author_first_name'] = $value['first_name']; 
             $out[$key]['author_last_name'] = $value['last_name']; 
+            $out[$key]['fellows'] = $value['fellows'];
         }
 
         $this->response($out,200);
