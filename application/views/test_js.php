@@ -228,6 +228,26 @@
                 }
             });
           });
+        $("#4-5").click(function(e) {
+          e.preventDefault();
+                $.ajax({
+                url : 'api/v2/login_fellow_password',
+                type : 'POST',
+                data　: {json: '{"password":"huiter123"}'},
+                complete:function(x,t){   
+                  if(x.status==200)
+                  {
+                    $("#success").show();
+                    $("#success").fadeOut(1000);
+                  }
+                  else
+                  {
+                    $("#fail").show();
+                    $("#fail").fadeOut(1000);
+                  } 
+                }
+            });
+          });
 
 
         $("#5-1").click(function(e) {

@@ -422,6 +422,50 @@ class V2 extends REST_Controller
 
     }
 
+    //4-5重置当前登陆账号密码
+    function login_fellow_password_post()
+    {
+        $fellow_url_token = $this->_auth_fellow(); 
+        $json = $this->post('json');
+        $in =json_decode($json,TRUE);
+
+        $newpassword = $in['password'];
+               
+        if(empty($newpassword))
+        {
+            $this->response(array('error'=>'no password post'), 400);
+        }
+   
+        $this->load->model('fellow_model', '', TRUE);    
+        $fellow = $this->fellow_model->get_entry_byfellow_url_token($fellow_url_token); 
+
+        if (empty($fellow))
+        {
+            $this->response(array('error'=>'fellow_url_token is not exist'), 400);
+        }
+
+        $data['password'] = $newpassword;
+            
+        $this->fellow_model->update_entry($fellow_url_token,$data);
+
+        /*       
+        //发送重置密码邮件
+            $this->load->library('email');
+            $this->email->from('amdin@omarhub.com', 'Omar Hub');
+            $this->email->to($email); 
+            $this->email->subject('Reset your password in Omar Hub');
+            $html="Dear ".$fellow['last_name']." ".$fellow['first_name']."\n."."Your account\n"."Email:".$fellow['email']."\n"."New Password:".$data['password'];
+            $this->email->message($html);  
+            $this->email->send();
+        */
+        $fellow_password = $this->fellow_model->get_entry_byfellow_url_token($fellow_url_token); 
+
+        $out['password'] = $fellow_password['password'];
+
+        $this->response($out, 200);
+
+    }
+
     //#5、offer相关操作
 
     //5-1:创建一个Offer
