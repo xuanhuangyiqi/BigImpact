@@ -593,12 +593,12 @@ class Reset_model extends CI_Model {
          $this->db->insert('follow_offer', $data); 
          $data = array(
             'fellow_id'=> '1',
-            'offer_id'=> '5',
+            'offer_id'=> '1',
             'created'=> '1340675344',
             );
          $this->db->insert('follow_offer', $data); 
          $data = array(
-            'fellow_id'=> '1',
+            'fellow_id'=> '2',
             'offer_id'=> '4',
             'created'=> '1340675344',
             );
@@ -611,7 +611,7 @@ class Reset_model extends CI_Model {
          $this->db->insert('follow_offer', $data); 
          $data = array(
             'fellow_id'=> '3',
-            'offer_id'=> '3',
+            'offer_id'=> '4',
             'created'=> '1340675344',
             );
          $this->db->insert('follow_offer', $data); 
